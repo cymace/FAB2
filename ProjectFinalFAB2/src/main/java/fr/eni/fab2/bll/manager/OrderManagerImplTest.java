@@ -5,19 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.fab2.bean.Order;
+import fr.eni.fab2.bean.Plate;
+import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.bean.User;
 import fr.eni.fab2.exceptions.BLLException;
 
- class OrderManagerImplTest implements OrderManager {
+class OrderManagerImplTest implements OrderManager {
 
 	@Override
-	public Order add (Order order) throws BLLException {
+	public Order add(Order order) throws BLLException {
 
 		return order;
 	}
 
 	@Override
-	public void delete (Order order) throws BLLException {
+	public void delete(Order order) throws BLLException {
 
 	}
 
@@ -27,14 +29,17 @@ import fr.eni.fab2.exceptions.BLLException;
 	}
 
 	@Override
-	public void update (Order order) throws BLLException {
+	public void update(Order order) throws BLLException {
 
 	}
 
 	@Override
-	public List<Order> getAll()  throws BLLException {
+	public List<Order> getAll() throws BLLException {
+		List<Plate> plates = new ArrayList<>();
+		plates.add(new Plate());
+
 		List<Order> orders = new ArrayList<>();
-	orders.add(new Order(LocalDateTime.now(), new User()));
+		orders.add(new Order(LocalDateTime.now(), new User(), plates, new Restaurant()));
 		return orders;
 	}
 

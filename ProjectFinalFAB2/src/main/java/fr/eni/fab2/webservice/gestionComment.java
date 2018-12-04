@@ -93,9 +93,11 @@ public class gestionComment {
 	}
 	
 	@PUT
+	@Path("/{id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Comment updateComment(Comment commentUpdate, @Context final HttpServletResponse response){
-		
+	public Comment updateComment( @PathParam("id") int id ,Comment commentUpdate, @Context final HttpServletResponse response){
+		commentUpdate.setId(id);	
+
 		commentUpdate.setDateComment(LocalDateTime.now().withNano(0));
 		try {
 			commentManager.update(commentUpdate);

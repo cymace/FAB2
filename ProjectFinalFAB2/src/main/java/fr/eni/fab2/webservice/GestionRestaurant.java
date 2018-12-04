@@ -93,10 +93,11 @@ public class GestionRestaurant {
 	}
 	
 	@PUT
+	@Path("/{id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Restaurant updateRestaurant(Restaurant restaurantUpdate, @Context final HttpServletResponse response){
+	public Restaurant updateRestaurant(@PathParam("id") int id, Restaurant restaurantUpdate, @Context final HttpServletResponse response){
 				
-		
+		restaurantUpdate.setId(id);
 		try {
 			restaurantManager.update(restaurantUpdate);
 		} catch (BLLException e) {

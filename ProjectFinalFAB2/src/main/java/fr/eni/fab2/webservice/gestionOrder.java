@@ -72,7 +72,7 @@ public class gestionOrder {
 		@POST
 		@Consumes(MediaType.APPLICATION_JSON)
 		public Order addOrder(Order order , @Context final HttpServletResponse response) {
-order.setDateOrder(LocalDateTime.now().withNano(0));
+        order.setDateOrder(LocalDateTime.now().withNano(0));
 			try {
 				order= orderManager.add(order);
 			} catch (BLLException e) {

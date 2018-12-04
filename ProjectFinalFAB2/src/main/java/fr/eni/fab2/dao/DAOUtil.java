@@ -9,7 +9,7 @@ public class DAOUtil {
 	private static EntityManagerFactory emf;
 
 	static{
-		emf = Persistence.createEntityManagerFactory("Mysql_UP");
+		emf = Persistence.createEntityManagerFactory("Postgres_UP");
 	}
 	
 	public static EntityManager getEntityManager(){

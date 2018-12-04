@@ -3,8 +3,10 @@ package fr.eni.fab2.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,6 +33,7 @@ private static final long serialVersionUID = 1L;
 	List<Order> orders;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
+	@Basic(fetch=FetchType.LAZY)
 	List<Plate> plates;
 
 	public Restaurant() {
@@ -38,6 +41,16 @@ private static final long serialVersionUID = 1L;
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	public Restaurant(String name, String addresse, int numberPlacesMax) {
+		super();
+		this.name = name;
+		this.addresse = addresse;
+		this.numberPlacesMax = numberPlacesMax;
+	}
+	
+	
+	
 	public Restaurant(String name, String addresse, int numberPlacesMax, List<Reservation> reservations,
 			List<Order> orders, List<Plate> plates) {
 		super();
@@ -115,14 +128,11 @@ private static final long serialVersionUID = 1L;
 	public void setPlates(List<Plate> plates) {
 		this.plates = plates;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+
+	@Override
+	public String toString() {
+		return "Restaurant [id=" + id + ", name=" + name + ", addresse=" + addresse + ", numberPlacesMax="
+				+ numberPlacesMax + "]";
+	}
 }

@@ -3,11 +3,14 @@ package fr.eni.fab2.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -27,7 +30,8 @@ private static final long serialVersionUID = 1L;
 	@OneToMany(cascade=CascadeType.ALL)
 	List<Comment> comments;
 	
-	@ManyToMany(mappedBy="Plate")
+	@ManyToMany(mappedBy="plates")
+	@Basic(fetch=FetchType.LAZY)
 	List<Restaurant> restaurants;
 	
 	@ManyToMany(cascade=CascadeType.ALL)

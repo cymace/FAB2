@@ -95,18 +95,22 @@ public class gestionPlats {
 
 	
 	@POST
+	@Path("/restaurants={id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Plate addPlate(Plate plate , @Context final HttpServletResponse response) {
+	public Plate addPlate(@PathParam("id") int idRestaurant, Plate plate , @Context final HttpServletResponse response) {
 		
 		try {
-			plate= plateManager.add(plate);
+						
+			plate= plateManager.add(new Plate() , idRestaurant);
+			
 		} catch (BLLException e) {
 			System.out.println(e.getMessage());
 			try {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			} catch (IOException ex) {
 				System.out.println(ex.getMessage());
-			}		}
+			}		
+			}
 		
 		
 		
@@ -114,9 +118,9 @@ public class gestionPlats {
 	}
 	
 	@POST
-	@Path("/{id:\\d+}")
+	@Path("/addComments={id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Comment addComment(@PathParam("id") int id,Comment comment , @Context final HttpServletResponse response)  {
+	public Comment addComment(@PathParam("id") int id, Comment comment , @Context final HttpServletResponse response)  {
 	
 		
 		try {
@@ -146,9 +150,10 @@ public class gestionPlats {
 	}
 	
 	@PUT
+	@Path("/{id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Plate updatePlate(Plate plateUpdate, @Context final HttpServletResponse response){
-				
+	public Plate updatePlate(@PathParam("id") int id,Plate plateUpdate, @Context final HttpServletResponse response){
+			plateUpdate.setId(id);	
 		
 		try {
 			plateManager.update(plateUpdate);
@@ -185,8 +190,7 @@ public class gestionPlats {
 				System.out.println(ex.getMessage());
 			}		
 		}
-		
-		
+			
 		
 		return plate;
 	}

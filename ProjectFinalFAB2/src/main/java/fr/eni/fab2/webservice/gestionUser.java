@@ -110,8 +110,9 @@ public class gestionUser {
 		}
 		
 		@PUT
+		@Path("/{id:\\d+}")
 		@Consumes(MediaType.APPLICATION_JSON)
-		public User updateUser(User userUpdate, @Context final HttpServletResponse response){
+		public User updateUser(User userUpdate,@PathParam("id") int id, @Context final HttpServletResponse response){
 					
 			
 			try {
