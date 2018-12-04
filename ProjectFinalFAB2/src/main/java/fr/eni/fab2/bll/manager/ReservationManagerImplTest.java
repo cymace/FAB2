@@ -4,22 +4,23 @@ import java.util.List;
 
 import fr.eni.fab2.bean.Reservation;
 import fr.eni.fab2.bean.User;
+import fr.eni.fab2.exceptions.BLLException;
 
  class ReservationManagerImplTest implements ReservationManager {
 
 	@Override
-	public Reservation add(Reservation reservation) {
+	public Reservation add(Reservation reservation) throws BLLException {
 		reservation.setId(1);
 		return reservation;
 	}
 
 	@Override
-	public void delete(Reservation reservation) {
+	public void delete(Reservation reservation) throws BLLException {
 		
 	}
 
 	@Override
-	public Reservation getById(int id) {
+	public Reservation getById(int id) throws BLLException {
 		Reservation reservation = new Reservation();
 				reservation.setId(id);
 				reservation.setUser(new User("gobron", "fabien", "07.78.76.28.35", "fabiengobron@outlook.com", "password", true));
@@ -27,12 +28,12 @@ import fr.eni.fab2.bean.User;
 	}
 
 	@Override
-	public void update(Reservation reservation) {
+	public void update(Reservation reservation) throws BLLException {
 		
 	}
 
 	@Override
-	public List<Reservation> getAll() {
+	public List<Reservation> getAll() throws BLLException {
 List<Reservation> reservations =null;
 		return reservations;
 	}
