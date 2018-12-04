@@ -3,6 +3,7 @@ package fr.eni.fab2.bll.manager;
 import java.util.List;
 
 import fr.eni.fab2.bean.Plate;
+import fr.eni.fab2.bean.Restaurant;
 
 public interface PlateManager {
 	
@@ -15,5 +16,7 @@ public interface PlateManager {
 	public void update(Plate plate);
 
 	public List<Plate> getAll();
+	
+	public List<Plate> getByRestaurants(Restaurant restaurant);
 
 }
