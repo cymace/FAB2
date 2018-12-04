@@ -6,10 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import fr.eni.fab2.bean.Restaurant;
-import fr.eni.fab2.exceptions.DAOException;
 
 
-public class RestaurantDAOImpl {
+public class RestaurantDAOImpl implements RestaurantDAO{
 	
 	/*public RestaurantDAOImpl(){
 		daoRestaurant = new GenericDaoImpl<>();
@@ -55,9 +54,20 @@ public class RestaurantDAOImpl {
 	}
 	
 	public List<Restaurant> findAll() {
-		String req = "Select Object(f) from Restaurant r";
+		String req = "Select Object(r) from Restaurant r";
 		return DAOUtil.getEntityManager().createQuery(req, Restaurant.class).getResultList();
 	}
+	
+	public Restaurant selectById(int id) {
+		return DAOUtil.getEntityManager().find(Restaurant.class, id);
+			
+	}
+	
+	/*public List<plates> selectPlates(Restaurant restaurant) {
+		return DAOUtil.getEntityManager().			
+	}*/
+	
+	
 	
 	
 

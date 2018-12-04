@@ -27,7 +27,7 @@ private static final long serialVersionUID = 1L;
 	@OneToMany(cascade=CascadeType.ALL)
 	List<Comment> comments;
 	
-	@ManyToMany(mappedBy="Plate")
+	@ManyToMany(mappedBy="plates")
 	List<Restaurant> restaurants;
 	
 	@ManyToMany(cascade=CascadeType.ALL)

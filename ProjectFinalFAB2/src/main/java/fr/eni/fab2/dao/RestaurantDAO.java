@@ -15,6 +15,8 @@ public interface RestaurantDAO {
 
 	public List<Restaurant> findAll() throws Exception;
 	
-	public List<Plate> getPlateByRestaurant(int idRestaurant) throws Exception;
+	//public List<Plate> getPlateByRestaurant(int idRestaurant) throws Exception;
+	
+	public Restaurant selectById(int id);
 
 }
