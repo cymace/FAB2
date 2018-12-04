@@ -7,7 +7,7 @@ import fr.eni.fab2.bean.Restaurant;
 
 public interface RestaurantDAO {
 	
-	public void add(Restaurant restaurant) throws Exception;
+	public int add(Restaurant restaurant) throws Exception;
 
 	public void delete(int id);
 

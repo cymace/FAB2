@@ -10,7 +10,7 @@ import fr.eni.fab2.bean.User;
 
 public class PlateDAOImpl implements PlateDAO{
 	
-	public void add(Plate plate) {
+	public int add(Plate plate) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -21,6 +21,7 @@ public class PlateDAOImpl implements PlateDAO{
 			et.rollback();
 			//throw new DAOException("Erreur lors de l'ajout du plate " + plate + " : " + e.getMessage());
 		}
+		return plate.getId();
 	}
 	
 	public void update(Plate plate) {
