@@ -48,6 +48,17 @@ private static final long serialVersionUID = 1L;
 		this.restaurants = restaurants;
 		this.orders = orders;
 	}
+	
+	
+
+	public Plate(String name, String imagePlate, float prix, List<Comment> comments, List<Order> orders) {
+		super();
+		this.name = name;
+		this.imagePlate = imagePlate;
+		this.prix = prix;
+		this.comments = comments;
+		this.orders = orders;
+	}
 
 	public int getId() {
 		return id;

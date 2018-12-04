@@ -9,7 +9,7 @@
 		<class>fr.eni.fab2.bean.Order</class>
 		<class>fr.eni.fab2.bean.Plate</class>
 		<class>fr.eni.fab2.bean.Reservation</class>
-		<class>fr.eni.fab2.bean.Restaurant</class>
+		<class>fr.eni.fab2.bean.Restaurant</class>		
 		<class>fr.eni.fab2.bean.User</class>
 
 		<properties>

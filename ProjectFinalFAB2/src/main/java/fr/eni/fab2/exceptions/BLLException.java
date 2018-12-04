@@ -1,6 +1,6 @@
 package fr.eni.fab2.exceptions;
 
-public class DAOException extends Exception{
+public class BLLException extends Exception{
 	
 	//private static final long serialVersionUID = 1L;
 
@@ -13,8 +13,8 @@ public class DAOException extends Exception{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public  DAOException(String msg){
+	public  BLLException(String msg){
 		super(msg);
-	}
+	} 
 
 }
