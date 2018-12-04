@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import fr.eni.fab2.bean.Comment;
 import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bll.manager.BllManagerFactory;
 import fr.eni.fab2.bll.manager.PlateManager;
@@ -89,6 +90,8 @@ public class gestionPlats {
 		return plates;
 		
 	}
+	
+	
 
 	
 	@POST
@@ -108,6 +111,38 @@ public class gestionPlats {
 		
 		
 		return plate;
+	}
+	
+	@POST
+	@Path("/{id:\\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Comment addComment(@PathParam("id") int id,Comment comment , @Context final HttpServletResponse response)  {
+	
+		
+		try {
+			
+			Plate plate=plateManager.getById(id);
+			List<Comment> comments;
+			if(plate.getComments()==null){
+				comments= new ArrayList<>();
+			}else{
+			 comments = plate.getComments();
+			}
+			comments.add(BllManagerFactory.getCommentManager().add(comment));
+			plate.setComments(comments);
+			plateManager.update(plate);
+
+		} catch (BLLException e) {
+			System.out.println(e.getMessage());
+			try {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			} catch (IOException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		
+		return comment;
+		
 	}
 	
 	@PUT

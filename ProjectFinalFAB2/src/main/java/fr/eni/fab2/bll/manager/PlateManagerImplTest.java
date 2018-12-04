@@ -62,7 +62,7 @@ class PlateManagerImplTest implements PlateManager {
 		restaurants.add(restaurant);
 		restaurants.add(restaurant);
 
-		Plate plate = new Plate("boeuf", "http\\monurl", 50, comments, restaurants, null);
+		Plate plate = new Plate("boeuf", "https://images-na.ssl-images-amazon.com/images/I/81exZO5XR6L.jpg", 50, comments, restaurants, null);
 		plates.add(plate);
 		plates.add(plate);
 		plates.add(plate);

@@ -148,9 +148,7 @@ public class gestionUser {
 				} catch (IOException ex) {
 					System.out.println(ex.getMessage());
 				}		
-			}
-			
-			
+			}				
 			
 			return user;
 		}
