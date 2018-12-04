@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import fr.eni.fab2.bean.Order;
+import fr.eni.fab2.bean.User;
 
 public class OrderDAOImpl implements OrderDAO{
 	
@@ -35,16 +36,18 @@ public class OrderDAOImpl implements OrderDAO{
 		}
 	}
 	
-	public void delete(Order order) {
+	public void delete(int id) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		try {
-			em.remove(order);
+			Order orderDelete;
+			orderDelete = em.find(Order.class, id);
+			em.remove(orderDelete);
 			et.commit();
 		} catch (Exception e) {
 			et.rollback();
-			//throw new DAOException("Erreur lors de la delete du order " + order + " : " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

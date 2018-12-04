@@ -15,6 +15,7 @@ public class test {
 		
 		
 		User user1 = new User ("Smith", "John", "065588", "mail", "password", false);
+		User user2 = new User ("Macron", "Emmanuel", "03333", "mail@eliseo", "giletsjeune", false);
 		
 		
 		
@@ -23,14 +24,14 @@ public class test {
 		System.out.println("name rest1: "+rest1.getName());
 		System.out.println("Surname user1: "+user1.getSurname());*/
 		
-		//userDao.add(user1);
+		userDao.add(user2);
 		
 		//restDao.add(rest1);
 		
-		Restaurant restToDelete = new Restaurant();		
+		/*Restaurant restToDelete = new Restaurant();		
 		restToDelete = restDao.selectById(4);
 		System.out.println("deleting restaurant: "+restToDelete.toString());
-		restDao.delete(restToDelete);
+		restDao.delete(restToDelete);*/
 		
 		/*Restaurant restToUpdate = new Restaurant();
 		restToUpdate = restDao.selectById(3);
@@ -42,6 +43,26 @@ public class test {
 		for (Restaurant r:restaurants){
 			System.out.println("/nRistorante:/n"+r.toString());
 		}
+		
+		restDao.delete(4);
+		
+		//OrderDAOImpl ord1 =new OrderDAOImpl(valueOf(2007-12-03T10:15:30), user1)
+		
+		List<User> users = userDao.findAll();
+		for (User u:users){
+			System.out.println("/nUser:/n"+u.toString());
+		}
+		
+		
+		userDao.delete(user2.getId());
+		
+		users = userDao.findAll();
+		
+		for (User u:users){
+			System.out.println("/nUser:/n"+u.toString());
+		}
+		
+		
 	
 		
 		

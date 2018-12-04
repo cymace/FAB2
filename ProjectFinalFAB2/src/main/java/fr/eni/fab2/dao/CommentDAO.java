@@ -10,7 +10,7 @@ public interface CommentDAO {
 	
 	public void update(Comment comment);
 	
-	public void delete(Comment comment);
+	public void delete(int id);
 	
 	public List<Comment> findAll();
 

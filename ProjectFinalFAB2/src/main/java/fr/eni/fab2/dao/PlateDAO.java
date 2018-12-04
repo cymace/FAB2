@@ -10,7 +10,7 @@ public interface PlateDAO {
 	
 	public void update(Plate plate);
 	
-	public void delete(Plate plate);
+	public void delete(int id);
 	
 	public List<Plate> findAll();
 

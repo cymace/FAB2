@@ -10,7 +10,7 @@ public interface ReservationDAO {
 	
 	public void update(Reservation reservation);
 	
-	public void delete(Reservation reservation);
+	public void delete(int id);
 	
 	public List<Reservation> findAll();
 

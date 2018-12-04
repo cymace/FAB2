@@ -9,7 +9,7 @@ public interface RestaurantDAO {
 	
 	public void add(Restaurant restaurant) throws Exception;
 
-	public void delete(Restaurant restaurant) throws Exception;
+	public void delete(int id);
 
 	public void update(Restaurant restaurant) throws Exception;
 

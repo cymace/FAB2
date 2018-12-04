@@ -10,8 +10,10 @@ public interface UserDAO {
 	
 	public void update(User user);
 	
-	public void delete(User user);
+	public void delete(int id);
 	
 	public List<User> findAll();
+	
+	public User selectById(int id);
 
 }

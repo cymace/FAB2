@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.bean.User;
+import fr.eni.fab2.exceptions.DAOException;
 
 public class UserDAOImpl implements UserDAO{
 	
@@ -35,22 +37,29 @@ public class UserDAOImpl implements UserDAO{
 		}
 	}
 	
-	public void delete(User user) {
+	public void delete(int id) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		try {
-			em.remove(user);
+			User userDelete;
+			userDelete = em.find(User.class, id);
+			em.remove(userDelete);
 			et.commit();
 		} catch (Exception e) {
 			et.rollback();
-			//throw new DAOException("Erreur lors de la delete du user " + user + " : " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
 	public List<User> findAll() {
 		String req = "Select Object(u) from User u";
 		return DAOUtil.getEntityManager().createQuery(req, User.class).getResultList();
+	}
+	
+	public User selectById(int id) {
+		return DAOUtil.getEntityManager().find(User.class, id);
+			
 	}
 
 }

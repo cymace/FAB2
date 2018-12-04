@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import fr.eni.fab2.bean.Plate;
+import fr.eni.fab2.bean.User;
 
 public class PlateDAOImpl implements PlateDAO{
 	
@@ -35,16 +36,18 @@ public class PlateDAOImpl implements PlateDAO{
 		}
 	}
 	
-	public void delete(Plate plate) {
+	public void delete(int id) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		try {
-			em.remove(plate);
+			Plate plateDelete;
+			plateDelete = em.find(Plate.class, id);
+			em.remove(plateDelete);
 			et.commit();
 		} catch (Exception e) {
 			et.rollback();
-			//throw new DAOException("Erreur lors de la delete du plate " + plate + " : " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

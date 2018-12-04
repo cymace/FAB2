@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import fr.eni.fab2.bean.Reservation;
+import fr.eni.fab2.bean.User;
 
 public class ReservationDAOImpl implements ReservationDAO{
 	
@@ -35,16 +36,18 @@ public class ReservationDAOImpl implements ReservationDAO{
 		}
 	}
 	
-	public void delete(Reservation reservation) {
+	public void delete(int id) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		try {
-			em.remove(reservation);
+			Reservation reservationDelete;
+			reservationDelete = em.find(Reservation.class, id);
+			em.remove(reservationDelete);
 			et.commit();
 		} catch (Exception e) {
 			et.rollback();
-			//throw new DAOException("Erreur lors de la delete du reservation " + reservation + " : " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

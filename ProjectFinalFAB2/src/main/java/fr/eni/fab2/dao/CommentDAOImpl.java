@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import fr.eni.fab2.bean.Comment;
+import fr.eni.fab2.bean.User;
 
 public class CommentDAOImpl implements CommentDAO{
 	
@@ -35,16 +36,18 @@ public class CommentDAOImpl implements CommentDAO{
 		}
 	}
 	
-	public void delete(Comment comment) {
+	public void delete(int id) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		try {
-			em.remove(comment);
+			Comment commentDelete;
+			commentDelete = em.find(Comment.class, id);
+			em.remove(commentDelete);
 			et.commit();
 		} catch (Exception e) {
 			et.rollback();
-			//throw new DAOException("Erreur lors de la delete du comment " + comment + " : " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

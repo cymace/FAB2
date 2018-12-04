@@ -10,7 +10,7 @@ public interface OrderDAO {
 	
 	public void update(Order order);
 	
-	public void delete(Order order);
+	public void delete(int id);
 	
 	public List<Order> findAll();
 
