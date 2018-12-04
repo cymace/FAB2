@@ -8,6 +8,11 @@ public class DAOException extends Exception{
 		super();
 	}*/
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public  DAOException(String msg){
 		super(msg);
 	}

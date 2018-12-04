@@ -1,8 +1,11 @@
 package fr.eni.fab2.bll.manager;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.fab2.bean.Order;
+import fr.eni.fab2.bean.User;
 import fr.eni.fab2.exceptions.BLLException;
 
  class OrderManagerImplTest implements OrderManager {
@@ -20,7 +23,7 @@ import fr.eni.fab2.exceptions.BLLException;
 
 	@Override
 	public Order getById(int id) throws BLLException {
-		return new Order();
+		return new Order(LocalDateTime.now(), new User());
 	}
 
 	@Override
@@ -30,7 +33,8 @@ import fr.eni.fab2.exceptions.BLLException;
 
 	@Override
 	public List<Order> getAll()  throws BLLException {
-		List<Order> orders = null;
+		List<Order> orders = new ArrayList<>();
+	orders.add(new Order(LocalDateTime.now(), new User()));
 		return orders;
 	}
 

@@ -18,6 +18,6 @@ public interface PlateManager {
 
 	public List<Plate> getAll() throws BLLException;
 	
-	public List<Plate> getByRestaurants(Restaurant restaurant) throws BLLException;
+	public List<Plate> getByRestaurant(Restaurant restaurant) throws BLLException;
 
 }

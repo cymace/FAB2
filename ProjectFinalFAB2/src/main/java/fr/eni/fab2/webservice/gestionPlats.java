@@ -1,5 +1,6 @@
 package fr.eni.fab2.webservice;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,14 +20,14 @@ import fr.eni.fab2.bll.manager.BllManagerFactory;
 import fr.eni.fab2.bll.manager.PlateManager;
 import fr.eni.fab2.exceptions.BLLException;
 
-@Path("/plats")
+@Path("/plates")
 public class gestionPlats {
 	
 	private PlateManager plateManager = BllManagerFactory.getPlateManager();
 	
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Plate> getplats(@Context final HttpServletResponse response)  {
+	public List<Plate> getplates(@Context final HttpServletResponse response)  {
 		
 		
 		List<Plate> plates=new ArrayList<>();		
@@ -36,7 +37,11 @@ public class gestionPlats {
 			plates = plateManager.getAll();
 		} catch (BLLException e) {
 			System.out.println(e.getMessage());
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			try {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			} catch (IOException ex) {
+				System.out.println(ex.getMessage());
+			}
 		}
 		
 		return plates;
@@ -46,31 +51,59 @@ public class gestionPlats {
 	@GET
 	@Path("/{id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Plate getplat(@PathParam("id") int id, @Context final HttpServletResponse response)  {
+	public Plate getPlate(@PathParam("id") int id, @Context final HttpServletResponse response)  {
 		Plate plate = null;
 		
 		try {
 			plate = plateManager.getById(id);
 		} catch (BLLException e) {
 			System.out.println(e.getMessage());
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		}
+			try {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			} catch (IOException ex) {
+				System.out.println(ex.getMessage());
+			}		}
 		
 		return plate;
+		
+	}
+	
+	@GET
+	@Path("/restaurant={id:\\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<Plate> getPlatesByRestaurant(@PathParam("id") int id, @Context final HttpServletResponse response)  {
+		List<Plate> plates = new ArrayList<>();
+		
+		try {
+			
+			plates = plateManager.getByRestaurant(BllManagerFactory.getRestaurantManager().getById(id));
+		} catch (BLLException e) {
+			System.out.println(e.getMessage());
+			try {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			} catch (IOException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		
+		return plates;
 		
 	}
 
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Plate addplate(Plate plate , @Context final HttpServletResponse response) {
+	public Plate addPlate(Plate plate , @Context final HttpServletResponse response) {
 		
 		try {
 			plate= plateManager.add(plate);
 		} catch (BLLException e) {
 			System.out.println(e.getMessage());
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		}
+			try {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			} catch (IOException ex) {
+				System.out.println(ex.getMessage());
+			}		}
 		
 		
 		
@@ -78,18 +111,19 @@ public class gestionPlats {
 	}
 	
 	@PUT
-	@Path("/{id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Plate updatePlate(@PathParam("id") int id , Plate plateUpdate, @Context final HttpServletResponse response){
-		plateUpdate.setId(id);
-		
+	public Plate updatePlate(Plate plateUpdate, @Context final HttpServletResponse response){
+				
 		
 		try {
 			plateManager.update(plateUpdate);
 		} catch (BLLException e) {
 			System.out.println(e.getMessage());
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		
+			try {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			} catch (IOException ex) {
+				System.out.println(ex.getMessage());
+			}		
 		}
 
 		
@@ -110,8 +144,11 @@ public class gestionPlats {
 			plateManager.delete(plate);
 		} catch (BLLException e) {
 			System.out.println(e.getMessage());
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		
+			try {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			} catch (IOException ex) {
+				System.out.println(ex.getMessage());
+			}		
 		}
 		
 		

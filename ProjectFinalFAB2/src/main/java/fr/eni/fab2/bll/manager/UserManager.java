@@ -17,4 +17,6 @@ public interface UserManager {
 		public void update(User user) throws BLLException;
 
 		public List<User> getAll() throws BLLException;
+		
+		public User getByEmail(String email) throws BLLException;
 }

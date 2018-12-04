@@ -38,6 +38,7 @@ class PlateManagerImplTest implements PlateManager {
 
 	@Override
 	public List<Plate> getAll() throws BLLException {
+		System.out.println("get all plate");
 		LocalDateTime time = LocalDateTime.now();
 		List<Plate> plates = new ArrayList<>();
 		List<Comment> comments = new ArrayList<>();
@@ -69,10 +70,11 @@ class PlateManagerImplTest implements PlateManager {
 	}
 
 	@Override
-	public List<Plate> getByRestaurants(Restaurant restaurant) throws BLLException {
+	public List<Plate> getByRestaurant(Restaurant restaurant) throws BLLException {
 		List<Plate> plates = new ArrayList<>();
 		// plates.add(new Plate("boeuf", "http:\\monurl", 10, "mon
 		// commentaire",new Restaurant() , new Order()));
+		System.out.println("getPlatesByRestaurant");
 		return plates;
 	}
 

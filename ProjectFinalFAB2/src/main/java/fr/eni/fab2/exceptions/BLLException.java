@@ -8,6 +8,11 @@ public class BLLException extends Exception{
 		super();
 	}*/
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public  BLLException(String msg){
 		super(msg);
 	} 
