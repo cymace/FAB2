@@ -3,8 +3,10 @@ package fr.eni.fab2.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,6 +33,7 @@ private static final long serialVersionUID = 1L;
 	List<Order> orders;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
+	@Basic(fetch=FetchType.LAZY)
 	List<Plate> plates;
 
 	public Restaurant() {

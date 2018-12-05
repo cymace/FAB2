@@ -14,18 +14,44 @@ import fr.eni.fab2.exceptions.BLLException;
 class PlateManagerImplTest implements PlateManager {
 
 	@Override
-	public Plate add(Plate plate)  throws BLLException {
-		System.out.println("add plate");
-		return plate;
+	public Plate add(Plate plate, int id) throws BLLException {
+
+		RestaurantManager restaurantManager = BllManagerFactory.getRestaurantManager();
+		Restaurant restaurant = restaurantManager.getById(id);
+		List<Restaurant> restaurants;
+		List<Plate> plates;
+		
+		if (restaurant.getPlates() == null) {
+			restaurants = new ArrayList<>();
+		} else {
+			restaurants = plate.getRestaurants();
+		}
+		
+		if (plate.getRestaurants() == null) {
+			plates = new ArrayList<>();
+		} else {
+			plates = restaurant.getPlates();
+		}
+		
+		restaurants.add(restaurant);
+		plate.setRestaurants(restaurants);
+
+		System.out.println("add plate"); // ajout a la BDD
+		
+		plates.add(plate);
+		restaurant.setPlates(plates);
+		restaurantManager.update(restaurant);
+
+		return this.getById(2);
 	}
 
 	@Override
-	public void delete(Plate plate)  throws BLLException {
-    System.out.println("supprimer plate");
+	public void delete(Plate plate) throws BLLException {
+		System.out.println("supprimer plate");
 	}
 
 	@Override
-	public Plate getById(int id)  throws BLLException {
+	public Plate getById(int id) throws BLLException {
 		System.out.println("getById plate");
 		return new Plate();
 	}
@@ -45,24 +71,21 @@ class PlateManagerImplTest implements PlateManager {
 		List<Order> orders = new ArrayList<>();
 		List<Restaurant> restaurants = new ArrayList<>();
 
-		
-		
 		User user = new User("gobron", "fabien", "07.78.76.28.35", "fabiengobron@outlook.com", "password", true);
-			Comment comment = new Comment(time, 5, "commentaire", user);
+		Comment comment = new Comment(time, 5, "commentaire", user);
 		comments.add(comment);
 		comments.add(comment);
-		
-		
+
 		Order order = new Order(time, user);
 		orders.add(order);
 		orders.add(order);
-		
-		
+
 		Restaurant restaurant = new Restaurant("FAB Renne", "8 rue leo lagrange", 150, null, null);
 		restaurants.add(restaurant);
 		restaurants.add(restaurant);
 
-		Plate plate = new Plate("boeuf", "http\\monurl", 50, comments, restaurants, null);
+		Plate plate = new Plate("boeuf", "https://images-na.ssl-images-amazon.com/images/I/81exZO5XR6L.jpg", 50,
+				comments, restaurants, null);
 		plates.add(plate);
 		plates.add(plate);
 		plates.add(plate);

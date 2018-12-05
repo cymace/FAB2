@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import fr.eni.fab2.bean.Comment;
 import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bll.manager.BllManagerFactory;
 import fr.eni.fab2.bll.manager.PlateManager;
@@ -89,31 +90,70 @@ public class gestionPlats {
 		return plates;
 		
 	}
+	
+	
 
 	
 	@POST
+	@Path("/restaurants={id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Plate addPlate(Plate plate , @Context final HttpServletResponse response) {
+	public Plate addPlate(@PathParam("id") int idRestaurant, Plate plate , @Context final HttpServletResponse response) {
 		
 		try {
-			plate= plateManager.add(plate);
+						
+			plate= plateManager.add(new Plate() , idRestaurant);
+			
 		} catch (BLLException e) {
 			System.out.println(e.getMessage());
 			try {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			} catch (IOException ex) {
 				System.out.println(ex.getMessage());
-			}		}
+			}		
+			}
 		
 		
 		
 		return plate;
 	}
 	
-	@PUT
+	@POST
+	@Path("/addComments={id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Plate updatePlate(Plate plateUpdate, @Context final HttpServletResponse response){
-				
+	public Comment addComment(@PathParam("id") int id, Comment comment , @Context final HttpServletResponse response)  {
+	
+		
+		try {
+			
+			Plate plate=plateManager.getById(id);
+			List<Comment> comments;
+			if(plate.getComments()==null){
+				comments= new ArrayList<>();
+			}else{
+			 comments = plate.getComments();
+			}
+			comments.add(BllManagerFactory.getCommentManager().add(comment));
+			plate.setComments(comments);
+			plateManager.update(plate);
+
+		} catch (BLLException e) {
+			System.out.println(e.getMessage());
+			try {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			} catch (IOException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		
+		return comment;
+		
+	}
+	
+	@PUT
+	@Path("/{id:\\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Plate updatePlate(@PathParam("id") int id,Plate plateUpdate, @Context final HttpServletResponse response){
+			plateUpdate.setId(id);	
 		
 		try {
 			plateManager.update(plateUpdate);
@@ -150,8 +190,7 @@ public class gestionPlats {
 				System.out.println(ex.getMessage());
 			}		
 		}
-		
-		
+			
 		
 		return plate;
 	}

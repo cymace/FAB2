@@ -2,12 +2,16 @@ package fr.eni.fab2.bean;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -25,6 +29,15 @@ private static final long serialVersionUID = 1L;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private User user;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@Basic(fetch=FetchType.LAZY)
+	private List<Plate> plates;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@Basic(fetch=FetchType.LAZY)
+	private Restaurant restaurant;
+	
 
 	public Order() {
 		super();
@@ -35,6 +48,16 @@ private static final long serialVersionUID = 1L;
 		super();
 		this.dateOrder = dateOrder;
 		this.user = user;
+	}
+	
+	
+
+	public Order(LocalDateTime dateOrder, User user, List<Plate> plates, Restaurant restaurant) {
+		super();
+		this.dateOrder = dateOrder;
+		this.user = user;
+		this.plates = plates;
+		this.restaurant = restaurant;
 	}
 
 	public int getId() {
@@ -59,6 +82,22 @@ private static final long serialVersionUID = 1L;
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Plate> getPlates() {
+		return plates;
+	}
+
+	public void setPlates(List<Plate> plates) {
+		this.plates = plates;
+	}
+
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
 	}
 	
 	

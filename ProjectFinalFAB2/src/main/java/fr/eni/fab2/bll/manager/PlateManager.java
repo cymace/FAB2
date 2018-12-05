@@ -8,7 +8,7 @@ import fr.eni.fab2.exceptions.BLLException;
 
 public interface PlateManager {
 	
-    public Plate add(Plate plate) throws BLLException;
+    public Plate add(Plate plate , int id) throws BLLException;
 	
 	public void delete(Plate plate) throws BLLException;
 	

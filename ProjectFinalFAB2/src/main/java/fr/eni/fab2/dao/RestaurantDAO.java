@@ -2,7 +2,6 @@ package fr.eni.fab2.dao;
 
 import java.util.List;
 
-import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bean.Restaurant;
 
 public interface RestaurantDAO {

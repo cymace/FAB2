@@ -1,0 +1,10 @@
+ProjectFinalFAB2/.gradle
+ProjectFinalFAB2/.metadata
+ProjectFinalFAB2/.metadata/**
+ProjectFinalFAB2/.settings
+*.DS_Store
+ProjectFinalFAB2/build
+ProjectFinalFAB2/build/**
+ProjectFinalFAB2/bin
+ProjectFinalFAB2/bin/**
+*.classpath

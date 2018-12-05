@@ -92,9 +92,11 @@ package fr.eni.fab2.webservice;
 		}
 		
 		@PUT
+		@Path("/{id:\\d+}")
 		@Consumes(MediaType.APPLICATION_JSON)
-		public Reservation updateReservation(Reservation reservationUpdate, @Context final HttpServletResponse response){
+		public Reservation updateReservation(@PathParam("id") int id,Reservation reservationUpdate, @Context final HttpServletResponse response){
 			
+			reservationUpdate.setId(id);
 			reservationUpdate.setDateReservation(LocalDateTime.now().withNano(0));
 			try {
 				reservationManager.update(reservationUpdate);
