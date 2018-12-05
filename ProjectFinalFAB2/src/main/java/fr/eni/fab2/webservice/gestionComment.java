@@ -17,6 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import fr.eni.fab2.bean.Comment;
+import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bll.manager.BllManagerFactory;
 import fr.eni.fab2.bll.manager.CommentManager;
 import fr.eni.fab2.exceptions.BLLException;
@@ -24,8 +25,6 @@ import fr.eni.fab2.exceptions.BLLException;
 
 @Path("/comments")
 public class gestionComment {
-
-	
 	
 	private CommentManager commentManager = BllManagerFactory.getCommentManager();
 	
@@ -71,7 +70,7 @@ public class gestionComment {
 		
 	}
 
-	
+	/*
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Comment addComment(Comment comment , @Context final HttpServletResponse response) {
@@ -91,6 +90,38 @@ public class gestionComment {
 		
 		return comment;
 	}
+	*/
+	
+	@POST
+	@Path("/plateId={idPlate:\\d+}&userId={idUser:\\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Comment addComment(@PathParam("idPlate") int idPlate,@PathParam("idUser") int idUser, Comment comment , @Context final HttpServletResponse response)  {
+					
+			try {
+				
+				Plate plate=BllManagerFactory.getPlateManager().getById(idPlate);
+				List<Comment> comments;
+				if(plate.getComments()==null){
+					comments= new ArrayList<>();
+				}else{
+				 comments = plate.getComments();
+				}
+				comments.add(commentManager.add(comment,idUser));
+				plate.setComments(comments);
+				BllManagerFactory.getPlateManager().update(plate);
+
+			} catch (BLLException e) {
+				System.out.println(e.getMessage());
+				try {
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				} catch (IOException ex) {
+					System.out.println(ex.getMessage());
+				}
+			}
+		
+		
+		return comment;
+	}
 	
 	@PUT
 	@Path("/{id:\\d+}")
@@ -98,7 +129,7 @@ public class gestionComment {
 	public Comment updateComment( @PathParam("id") int id ,Comment commentUpdate, @Context final HttpServletResponse response){
 		commentUpdate.setId(id);	
 
-		commentUpdate.setDateComment(LocalDateTime.now().withNano(0));
+		
 		try {
 			commentManager.update(commentUpdate);
 		} catch (BLLException e) {
