@@ -56,5 +56,10 @@ public class OrderDAOImpl implements OrderDAO{
 		String req = "Select Object(o) from Order o";
 		return DAOUtil.getEntityManager().createQuery(req, Order.class).getResultList();
 	}
+	
+	public Order selectById(int id) {
+		return DAOUtil.getEntityManager().find(Order.class, id);
+			
+	}
 
 }
