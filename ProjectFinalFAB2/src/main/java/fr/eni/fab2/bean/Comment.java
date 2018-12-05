@@ -9,10 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "Comment_DB")
 public class Comment implements Serializable{
 	
 private static final long serialVersionUID = 1L;
@@ -25,7 +23,7 @@ private static final long serialVersionUID = 1L;
 	private int note;
 	private String text;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private User user;
 
 	public Comment() {

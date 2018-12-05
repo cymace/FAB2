@@ -19,7 +19,6 @@ public class CommentDAOImpl implements CommentDAO{
 			et.commit();
 		} catch (Exception e) {
 			et.rollback();
-			e.printStackTrace();
 			//throw new DAOException("Erreur lors de l'ajout du comment " + comment + " : " + e.getMessage());
 		}
 		return comment.getId();
