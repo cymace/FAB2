@@ -53,8 +53,8 @@ public class PlateManagerImpl implements PlateManager {
 
 	@Override
 	public Plate getById(int id) throws BLLException {
-		// Plate plate = plateDao.findbyId(id)
-		return null;
+		 Plate plate = plateDao.selectById(id);
+		return plate;
 	}
 
 	@Override

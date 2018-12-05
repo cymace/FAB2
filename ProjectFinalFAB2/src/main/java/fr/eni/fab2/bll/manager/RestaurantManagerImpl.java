@@ -14,8 +14,9 @@ public class RestaurantManagerImpl implements RestaurantManager {
 
 	@Override
 	public Restaurant add(Restaurant restaurant) throws BLLException {
-		// TODO Auto-generated method stub
-		return null;
+		int id = restaurantDAO.add(restaurant);
+		restaurant = this.getById(id);
+		return restaurant;
 	}
 
 	@Override
@@ -25,41 +26,41 @@ public class RestaurantManagerImpl implements RestaurantManager {
 		Plate plate = BllManagerFactory.getPlateManager().getById(plateId);
 		plates.add(plate);
 		restaurant.setPlates(plates);
-		
+
 		this.update(restaurant);
 
 		List<Restaurant> restaurants = (plate.getRestaurants() == null) ? new ArrayList<>() : plate.getRestaurants();
 		restaurants.add(restaurant);
 		plate.setRestaurants(restaurants);
 		plate.getRestaurants();
-		
+
 		BllManagerFactory.getPlateManager().update(plate);
-		
+
 		return restaurant;
 	}
 
 	@Override
 	public void delete(Restaurant restaurant) throws BLLException {
-restaurantDAO.delete(restaurant.getId());
+		restaurantDAO.delete(restaurant.getId());
 	}
 
 	@Override
 	public Restaurant getById(int id) throws BLLException {
-//Restaurant restaurant = restaurantDAO.findById(id);
-return null;
+		Restaurant restaurant = restaurantDAO.selectById(id);
+		return restaurant;
 	}
 
 	@Override
 	public void update(Restaurant restaurant) throws BLLException {
 
-	//restaurantDAO.update(restaurant);
+		restaurantDAO.update(restaurant);
 
 	}
 
 	@Override
 	public List<Restaurant> getAll() throws BLLException {
-		 //List<Restaurant> restaurants = restaurantDAO.findAll();
-		return null;
+		List<Restaurant> restaurants = restaurantDAO.findAll();
+		return restaurants;
 	}
 
 }

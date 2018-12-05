@@ -67,7 +67,8 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public Order getById(int id) throws BLLException {
-		return null;
+		Order order = orderDao.selectById(id);
+		return order;
 	}
 
 	@Override

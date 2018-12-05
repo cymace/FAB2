@@ -6,13 +6,13 @@ import fr.eni.fab2.bean.Restaurant;
 
 public interface RestaurantDAO {
 	
-	public int add(Restaurant restaurant) throws Exception;
+	public int add(Restaurant restaurant) ;
 
 	public void delete(int id);
 
-	public void update(Restaurant restaurant) throws Exception;
+	public void update(Restaurant restaurant) ;
 
-	public List<Restaurant> findAll() throws Exception;
+	public List<Restaurant> findAll() ;
 	
 	//public List<Plate> getPlateByRestaurant(int idRestaurant) throws Exception;
 	

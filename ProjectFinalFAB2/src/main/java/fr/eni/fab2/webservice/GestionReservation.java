@@ -73,10 +73,12 @@ import fr.eni.fab2.bll.manager.BllManagerFactory;
 
 		
 		@POST
-		@Path("/idUser={userId:\\d+}&idRestaurant=(restaurantId:\\d+}")
+		@Path("/idUser={userId:\\d+}&idRestaurant={restaurantId:\\d+}")
 		@Consumes(MediaType.APPLICATION_JSON)
 		public Reservation addReservation(@PathParam("userId") int userId,@PathParam("restaurantId") int restaurantId,Reservation reservation , @Context final HttpServletResponse response) {
-			
+			if(reservation == null){
+				reservation= new Reservation();
+			}
 		
 			try {
 				Restaurant restaurant = BllManagerFactory.getRestaurantManager().getById(restaurantId);

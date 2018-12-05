@@ -12,7 +12,7 @@ public abstract class BllManagerFactory {
 	
 	public static OrderManager getOrderManager()
 	{
-		return new OrderManagerImplTest();
+		return new OrderManagerImpl();
 	}
 	
 	public static PlateManager getPlateManager()
@@ -22,12 +22,12 @@ public abstract class BllManagerFactory {
 	
 	public static ReservationManager getReservationManager()
 	{
-		return new ReservationManagerImplTest();
+		return new ReservationManagerImpl();
 	}
 	
 	public static RestaurantManager getRestaurantManager()
 	{
-		return new RestaurantManagerImplTest();
+		return new RestaurantManagerImpl();
 	}
 	
 	public static UserManager getUserManager()

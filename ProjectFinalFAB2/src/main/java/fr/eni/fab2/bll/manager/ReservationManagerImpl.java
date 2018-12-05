@@ -27,8 +27,8 @@ public class ReservationManagerImpl implements ReservationManager {
 
 	@Override
 	public Reservation getById(int id) throws BLLException {
-		// reservationDAO.findById(id);
-		return null;
+		Reservation reservation=  reservationDAO.selectById(id);
+		return reservation;
 	}
 
 	@Override

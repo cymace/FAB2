@@ -77,7 +77,9 @@ public class GestionRestaurant {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Restaurant addRestaurant(Restaurant restaurant , @Context final HttpServletResponse response) {
-		
+		if(restaurant == null){
+			restaurant= new Restaurant();
+		}
 		try {
 			restaurant= restaurantManager.add(restaurant);
 		} catch (BLLException e) {
