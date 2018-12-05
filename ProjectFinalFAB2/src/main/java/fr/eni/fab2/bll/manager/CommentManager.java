@@ -7,7 +7,7 @@ import fr.eni.fab2.exceptions.BLLException;
 
 public interface CommentManager {
 	
-	public Comment add(Comment comment) throws BLLException;
+	public Comment add(Comment comment, int idUser) throws BLLException;
 	
 	public void delete(Comment comment)  throws BLLException;
 	

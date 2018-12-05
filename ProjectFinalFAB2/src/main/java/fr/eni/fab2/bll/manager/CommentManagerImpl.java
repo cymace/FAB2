@@ -8,7 +8,7 @@ import fr.eni.fab2.exceptions.BLLException;
  class CommentManagerImpl implements CommentManager {
 
 	@Override
-	public Comment add(Comment comment) throws BLLException {
+	public Comment add(Comment comment,int idUser) throws BLLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
