@@ -5,15 +5,19 @@ import java.util.List;
 
 import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bean.Restaurant;
+import fr.eni.fab2.dao.DaoFactory;
+import fr.eni.fab2.dao.RestaurantDAO;
 import fr.eni.fab2.exceptions.BLLException;
 
-class RestaurantManagerImplTest implements RestaurantManager {
+public class RestaurantManagerImpl implements RestaurantManager {
+	RestaurantDAO restaurantDAO = DaoFactory.getRestaurantDAO();
 
 	@Override
 	public Restaurant add(Restaurant restaurant) throws BLLException {
-		return restaurant;
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
+
 	@Override
 	public Restaurant addPlate(int restaurantId, int plateId) throws BLLException {
 		Restaurant restaurant = this.getById(restaurantId);
@@ -30,32 +34,32 @@ class RestaurantManagerImplTest implements RestaurantManager {
 		plate.getRestaurants();
 		
 		BllManagerFactory.getPlateManager().update(plate);
-			return restaurant;
+		
+		return restaurant;
 	}
 
 	@Override
 	public void delete(Restaurant restaurant) throws BLLException {
-
+restaurantDAO.delete(restaurant.getId());
 	}
 
 	@Override
 	public Restaurant getById(int id) throws BLLException {
-		return new Restaurant("monRestoGetById", "8 rue leo lagrange", 150, null, null);
+//Restaurant restaurant = restaurantDAO.findById(id);
+return null;
 	}
 
 	@Override
 	public void update(Restaurant restaurant) throws BLLException {
 
+	//restaurantDAO.update(restaurant);
+
 	}
 
 	@Override
 	public List<Restaurant> getAll() throws BLLException {
-		List<Restaurant> restaurants = new ArrayList<>();
-		restaurants.add(new Restaurant("monResto", "8 rue leo lagrange", 150, null, null));
-
-		return restaurants;
+		 //List<Restaurant> restaurants = restaurantDAO.findAll();
+		return null;
 	}
-
-	
 
 }

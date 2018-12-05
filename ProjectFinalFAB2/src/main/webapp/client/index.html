@@ -38,7 +38,7 @@
                         <p class="card-text">12 rue Legraverend, 35000 Rennes</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Reserver</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#Modal">Reserver</button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Commander</button>
                             </div>
 
@@ -54,7 +54,7 @@
                         <p class="card-text">1 rue des tuileries, 44000 Nantes</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Reserver</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#Modal">Reserver</button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Commander</button>
                             </div>
 
@@ -70,13 +70,64 @@
                         <p class="card-text">12 rue Jean Jaures, 29000 Brest</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Reserver</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#Modal">Reserver</button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Commander</button>
 
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+                <!-- Modal  -->
+                <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="rennesModalLabel">Reservation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                    <div class="form-group">
+                                    <label for="nom">Nom</label>
+                                    <input type="text" name="nom" id="nom" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="prenom">Prenom</label>
+                                    <input type="text" name="prenom" id="prenom" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="date">Date</label>
+                                    <input type="date" name="date" id="date" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="heure">heure</label>
+                                        <input type="text" name="heure" id="heure" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="telephone">Telephone</label>
+                                    <input type="text" name="telephone" id="telephone" class="form-control">
+                                    </div>
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                <button type="button" class="btn btn-primary">Reserver</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
         </div>

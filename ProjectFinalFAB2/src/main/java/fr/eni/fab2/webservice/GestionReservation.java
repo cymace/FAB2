@@ -18,7 +18,8 @@ package fr.eni.fab2.webservice;
 	import javax.ws.rs.core.MediaType;
 
 	import fr.eni.fab2.bean.Reservation;
-	import fr.eni.fab2.bll.manager.BllManagerFactory;
+import fr.eni.fab2.bean.Restaurant;
+import fr.eni.fab2.bll.manager.BllManagerFactory;
 	import fr.eni.fab2.bll.manager.ReservationManager;
 	import fr.eni.fab2.exceptions.BLLException;
 
@@ -72,12 +73,21 @@ package fr.eni.fab2.webservice;
 
 		
 		@POST
+		@Path("/idUser={userId:\\d+}&idRestaurant=(restaurantId:\\d+}")
 		@Consumes(MediaType.APPLICATION_JSON)
-		public Reservation addReservation(Reservation reservation , @Context final HttpServletResponse response) {
+		public Reservation addReservation(@PathParam("userId") int userId,@PathParam("restaurantId") int restaurantId,Reservation reservation , @Context final HttpServletResponse response) {
 			
-			reservation.setDateReservation(LocalDateTime.now().withNano(0));
+		
 			try {
-				reservation= reservationManager.add(reservation);
+				Restaurant restaurant = BllManagerFactory.getRestaurantManager().getById(restaurantId);
+				List<Reservation> reservations =(restaurant.getReservations()==null)? new ArrayList<>(): restaurant.getReservations();
+				
+				reservation= reservationManager.add(reservation, userId);
+				
+				reservations.add(reservation);
+				restaurant.setReservations(reservations);
+				BllManagerFactory.getRestaurantManager().update(restaurant);
+				
 			} catch (BLLException e) {
 				System.out.println(e.getMessage());
 				try {

@@ -12,7 +12,7 @@ import fr.eni.fab2.dao.RestaurantDAOImpl;
 import fr.eni.fab2.dao.UserDAOImpl;
 
 public class test {
-
+/*
 	public static void main(String[] args) {
 		
 		LocalDateTime timeNow = LocalDateTime.now();
@@ -183,5 +183,5 @@ public class test {
 		
 		
 	
-}
+}*/
 }
