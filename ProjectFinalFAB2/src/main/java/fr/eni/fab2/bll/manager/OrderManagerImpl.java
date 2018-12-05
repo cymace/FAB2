@@ -8,12 +8,13 @@ import fr.eni.fab2.bean.Order;
 import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.bean.User;
+import fr.eni.fab2.dao.OrderDAO;
+import fr.eni.fab2.dao.DaoFactory;
 import fr.eni.fab2.exceptions.BLLException;
 
-class OrderManagerImplTest implements OrderManager {
+public class OrderManagerImpl implements OrderManager {
+	OrderDAO orderDao = DaoFactory.getOrderDAO();
 
-	
-	private static Order orderTest;
 	@Override
 	public Order add(Order order, int userId, int restaurantsId, int plateId) throws BLLException {
 		order.setDateOrder(LocalDateTime.now().withNano(0));
@@ -32,7 +33,8 @@ class OrderManagerImplTest implements OrderManager {
 		plates.add(plate);
 		order.setPlates(plates);
 
-		System.out.println("ajout plates");
+		int id = orderDao.add(order);
+		order = this.getById(id);
 
 		List<Order> ordersResto;
 		List<Order> ordersPlates;
@@ -45,50 +47,37 @@ class OrderManagerImplTest implements OrderManager {
 		BllManagerFactory.getRestaurantManager().update(restaurant);
 		BllManagerFactory.getPlateManager().update(plate);
 
-		// WARNING a supprimer
-					orderTest=order;
 		return order;
 	}
 
 	@Override
 	public Order addPlate(Order order, int plateId) throws BLLException {
-		//WARNING a supprimer			
-		order=orderTest;	
 		List<Plate> plates = (order.getPlates() == null) ? new ArrayList<>() : order.getPlates();
 		Plate plate = BllManagerFactory.getPlateManager().getById(plateId);
 		plates.add(plate);
 		order.setPlates(plates);
 		this.update(order);
-		//WARNING a supprimer	
-		orderTest=order;
 		return order;
 	}
 
 	@Override
 	public void delete(Order order) throws BLLException {
-
+		orderDao.delete(order.getId());
 	}
 
 	@Override
 	public Order getById(int id) throws BLLException {
-		return new Order(LocalDateTime.now(), new User());
+		return null;
 	}
 
 	@Override
 	public void update(Order order) throws BLLException {
-		//WARNING a supprimer			
-		order=orderTest;
-		order.setDateOrder(LocalDateTime.now().withNano(0));
+		orderDao.update(order);
 	}
 
 	@Override
 	public List<Order> getAll() throws BLLException {
-		List<Plate> plates = new ArrayList<>();
-		plates.add(new Plate());
-
-		List<Order> orders = new ArrayList<>();
-		orders.add(new Order(LocalDateTime.now(), new User(), plates, new Restaurant()));
-		return orders;
+		return orderDao.findAll();
 	}
 
 }

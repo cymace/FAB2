@@ -24,7 +24,7 @@ import fr.eni.fab2.exceptions.BLLException;
 
 
 @Path("/comments")
-public class gestionComment {
+public class GestionComment {
 	
 	private CommentManager commentManager = BllManagerFactory.getCommentManager();
 	
@@ -106,7 +106,8 @@ public class gestionComment {
 				}else{
 				 comments = plate.getComments();
 				}
-				comments.add(commentManager.add(comment,idUser));
+				comment = commentManager.add(comment,idUser);
+				comments.add(comment);
 				plate.setComments(comments);
 				BllManagerFactory.getPlateManager().update(plate);
 

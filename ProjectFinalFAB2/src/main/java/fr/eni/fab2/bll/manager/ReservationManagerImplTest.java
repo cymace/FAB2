@@ -1,5 +1,6 @@
 package fr.eni.fab2.bll.manager;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +11,18 @@ import fr.eni.fab2.exceptions.BLLException;
 class ReservationManagerImplTest implements ReservationManager {
 
 	@Override
-	public Reservation add(Reservation reservation) throws BLLException {
+	public Reservation add(Reservation reservation, int userId) throws BLLException {
 		reservation.setId(1);
+		
+		reservation.setDateReservation(LocalDateTime.now().withNano(0));
+		reservation.setUser(BllManagerFactory.getUserManager().getById(userId));
+		
+		System.out.println("ajout reservation ");
+		
+		
+		
 		return reservation;
 	}
-
 	@Override
 	public void delete(Reservation reservation) throws BLLException {
 
@@ -42,5 +50,7 @@ class ReservationManagerImplTest implements ReservationManager {
 
 		return reservations;
 	}
+
+	
 
 }

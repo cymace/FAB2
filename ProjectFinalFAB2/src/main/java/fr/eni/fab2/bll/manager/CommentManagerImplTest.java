@@ -12,6 +12,7 @@ import fr.eni.fab2.exceptions.BLLException;
 	@Override
 	public Comment add(Comment comment , int idUser) throws BLLException {
 		
+		
 		comment = new Comment();
 		comment.setId(1);
 		comment.setUser(BllManagerFactory.getUserManager().getById(idUser));

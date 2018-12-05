@@ -23,7 +23,7 @@ import fr.eni.fab2.bll.manager.PlateManager;
 import fr.eni.fab2.exceptions.BLLException;
 
 @Path("/plates")
-public class gestionPlats {
+public class GestionPlats {
 	
 	
 	
