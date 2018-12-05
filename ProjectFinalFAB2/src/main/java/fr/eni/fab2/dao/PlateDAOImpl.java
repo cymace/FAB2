@@ -5,9 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import fr.eni.fab2.bean.Order;
 import fr.eni.fab2.bean.Plate;
-import fr.eni.fab2.bean.User;
+import fr.eni.fab2.bean.Restaurant;
 
 public class PlateDAOImpl implements PlateDAO{
 	
@@ -63,9 +62,8 @@ public class PlateDAOImpl implements PlateDAO{
 			
 	}
 	
-	/*public List<Plate> findPlatesOfRestaurant(int idRest) {
-		String req = "Select Object(i) from Plate p WHERE p.auteur LIKE :aut"";
-		return DAOUtil.getEntityManager().createQuery(req, Plate.class).getResultList();
-	}*/
+	public List<Plate> selectByRestaurant(Restaurant restaurant) {		
+		return restaurant.getPlates();
+	}
 
 }
