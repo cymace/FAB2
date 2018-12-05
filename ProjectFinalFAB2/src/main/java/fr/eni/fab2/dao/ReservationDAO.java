@@ -6,7 +6,7 @@ import fr.eni.fab2.bean.Reservation;
 
 public interface ReservationDAO {
 	
-	public void add(Reservation reservation);
+	public int add(Reservation reservation);
 	
 	public void update(Reservation reservation);
 	

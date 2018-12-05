@@ -23,7 +23,7 @@ private static final long serialVersionUID = 1L;
 	private int note;
 	private String text;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private User user;
 
 	public Comment() {

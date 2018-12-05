@@ -15,7 +15,7 @@ public class RestaurantDAOImpl implements RestaurantDAO{
 		daoRestaurant = new GenericDaoImpl<>();
 	}*/
 	
-	public void add(Restaurant restaurant) {
+	public int add(Restaurant restaurant) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -26,6 +26,7 @@ public class RestaurantDAOImpl implements RestaurantDAO{
 			et.rollback();
 			//throw new DAOException("Erreur lors de l'ajout du restaurant " + restaurant + " : " + e.getMessage());
 		}
+		return restaurant.getId();
 	}
 	
 	public void update(Restaurant restaurant) {

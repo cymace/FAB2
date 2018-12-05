@@ -6,7 +6,7 @@ import fr.eni.fab2.bean.Plate;
 
 public interface PlateDAO {
 	
-	public void add(Plate plate);
+	public int add(Plate plate);
 	
 	public void update(Plate plate);
 	

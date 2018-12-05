@@ -6,7 +6,7 @@ import fr.eni.fab2.bean.Order;
 
 public interface OrderDAO {
 	
-	public void add(Order order);
+	public int add(Order order);
 	
 	public void update(Order order);
 	

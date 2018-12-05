@@ -6,7 +6,7 @@ import fr.eni.fab2.bean.User;
 
 public interface UserDAO {
 	
-	public void add(User user);
+	public int add(User user);
 	
 	public void update(User user);
 	
@@ -15,5 +15,7 @@ public interface UserDAO {
 	public List<User> findAll();
 	
 	public User selectById(int id);
+	
+	public User selectByEmail(String email);
 
 }

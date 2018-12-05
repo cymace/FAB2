@@ -10,7 +10,7 @@ import fr.eni.fab2.bean.User;
 
 public class ReservationDAOImpl implements ReservationDAO{
 	
-	public void add(Reservation reservation) {
+	public int add(Reservation reservation) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -21,6 +21,7 @@ public class ReservationDAOImpl implements ReservationDAO{
 			et.rollback();
 			//throw new DAOException("Erreur lors de l'ajout du reservation " + reservation + " : " + e.getMessage());
 		}
+		return reservation.getId();
 	}
 	
 	public void update(Reservation reservation) {

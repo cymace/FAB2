@@ -10,7 +10,7 @@ import fr.eni.fab2.bean.User;
 
 public class OrderDAOImpl implements OrderDAO{
 	
-	public void add(Order order) {
+	public int add(Order order) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -21,6 +21,7 @@ public class OrderDAOImpl implements OrderDAO{
 			et.rollback();
 			//throw new DAOException("Erreur lors de l'ajout du order " + order + " : " + e.getMessage());
 		}
+		return order.getId();
 	}
 	
 	public void update(Order order) {

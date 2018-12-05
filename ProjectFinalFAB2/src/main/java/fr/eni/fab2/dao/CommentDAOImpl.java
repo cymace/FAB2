@@ -10,7 +10,7 @@ import fr.eni.fab2.bean.User;
 
 public class CommentDAOImpl implements CommentDAO{
 	
-	public void add(Comment comment) {
+	public int add(Comment comment) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -21,6 +21,7 @@ public class CommentDAOImpl implements CommentDAO{
 			et.rollback();
 			//throw new DAOException("Erreur lors de l'ajout du comment " + comment + " : " + e.getMessage());
 		}
+		return comment.getId();
 	}
 	
 	public void update(Comment comment) {
@@ -54,6 +55,11 @@ public class CommentDAOImpl implements CommentDAO{
 	public List<Comment> findAll() {
 		String req = "Select Object(c) from Comment c";
 		return DAOUtil.getEntityManager().createQuery(req, Comment.class).getResultList();
+	}
+	
+	public Comment selectById(int id) {
+		return DAOUtil.getEntityManager().find(Comment.class, id);
+			
 	}
 
 }
