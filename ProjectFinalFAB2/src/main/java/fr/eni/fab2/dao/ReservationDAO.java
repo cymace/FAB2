@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bean.Reservation;
+import fr.eni.fab2.exceptions.DAOException;
 
 public interface ReservationDAO {
 	

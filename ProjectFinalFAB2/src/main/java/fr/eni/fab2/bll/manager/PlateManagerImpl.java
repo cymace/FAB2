@@ -21,13 +21,13 @@ public class PlateManagerImpl implements PlateManager {
 		List<Restaurant> restaurants;
 		List<Plate> plates;
 
-		if (restaurant.getPlates() == null) {
+		if (plate.getRestaurants() == null) {
 			restaurants = new ArrayList<>();
 		} else {
 			restaurants = plate.getRestaurants();
 		}
 
-		if (plate.getRestaurants() == null) {
+		if (restaurant.getPlates() == null) {
 			plates = new ArrayList<>();
 		} else {
 			plates = restaurant.getPlates();
@@ -39,9 +39,9 @@ public class PlateManagerImpl implements PlateManager {
 		int idplate = plateDao.add(plate);
 		plate = this.getById(idplate);
 
-		plates.add(plate);
+		/*plates.add(plate);
 		restaurant.setPlates(plates);
-		restaurantManager.update(restaurant);
+		restaurantManager.update(restaurant);*/
 
 		return plate;
 	}
@@ -70,8 +70,8 @@ public class PlateManagerImpl implements PlateManager {
 
 	@Override
 	public List<Plate> getByRestaurant(Restaurant restaurant) throws BLLException {
-		//List<Plate> plates = plateDao.findByRestaurant(restaurant);
-		return null;
+		List<Plate> plates = plateDao.selectByRestaurant(restaurant);
+		return plates;
 	}
 
 }

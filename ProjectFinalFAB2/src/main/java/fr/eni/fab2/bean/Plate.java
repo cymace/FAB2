@@ -14,6 +14,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 @Entity
 public class Plate implements Serializable{
 	
@@ -32,9 +34,11 @@ private static final long serialVersionUID = 1L;
 	
 	@ManyToMany(mappedBy="plates")
 	@Basic(fetch=FetchType.LAZY)
+	@JsonBackReference 
 	List<Restaurant> restaurants;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
+	@Basic(fetch=FetchType.LAZY)
 	List<Order> orders;
 
 	public Plate() {

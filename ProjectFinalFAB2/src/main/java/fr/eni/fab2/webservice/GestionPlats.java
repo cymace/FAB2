@@ -95,10 +95,11 @@ public class GestionPlats {
 	}
 	
 	
+	
 
 	
 	@POST
-	@Path("/restaurants={id:\\d+}")
+	@Path("/restaurant={id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Plate addPlate(@PathParam("id") int idRestaurant, Plate plate , @Context final HttpServletResponse response) {
 		if(plate==null){

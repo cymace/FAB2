@@ -17,7 +17,7 @@ public abstract class BllManagerFactory {
 	
 	public static PlateManager getPlateManager()
 	{
-		return new PlateManagerImplTest();
+		return new PlateManagerImpl();
 	}
 	
 	public static ReservationManager getReservationManager()
