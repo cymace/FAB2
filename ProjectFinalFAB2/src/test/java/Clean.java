@@ -24,9 +24,9 @@ public class Clean {
 			userDao.delete(u.getId());
 		}
 		
-		for (Comment c:comments){
+		/*for (Comment c:comments){
 			commentDao.delete(c.getId());
-		}
+		}*/
 
 	}
 
