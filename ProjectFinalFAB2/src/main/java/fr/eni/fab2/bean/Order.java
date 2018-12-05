@@ -27,7 +27,7 @@ private static final long serialVersionUID = 1L;
 	
 	LocalDateTime dateOrder;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private User user;
 	
 	@ManyToMany(cascade=CascadeType.ALL)

@@ -7,7 +7,9 @@ import fr.eni.fab2.exceptions.BLLException;
 
 public interface OrderManager {
 	
-    public Order add(Order order) throws BLLException;
+    public Order add(Order order,int userId,int restaurantsId,int plateId) throws BLLException;
+    
+    public Order addPlate(Order order,int plateId) throws BLLException; // SERVICE uniquement en BLL
 	
 	public void delete(Order order) throws BLLException;
 	

@@ -16,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import fr.eni.fab2.bean.Comment;
+import fr.eni.fab2.bean.Order;
 import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bll.manager.BllManagerFactory;
 import fr.eni.fab2.bll.manager.PlateManager;
@@ -23,6 +24,8 @@ import fr.eni.fab2.exceptions.BLLException;
 
 @Path("/plates")
 public class gestionPlats {
+	
+	
 	
 	private PlateManager plateManager = BllManagerFactory.getPlateManager();
 	
@@ -118,21 +121,21 @@ public class gestionPlats {
 	}
 	
 	@POST
-	@Path("/addComments={id:\\d+}")
+	@Path("/addComments/plateId={idPlate:\\d+}&userId={idUser:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Comment addComment(@PathParam("id") int id, Comment comment , @Context final HttpServletResponse response)  {
+	public Comment addComment(@PathParam("idPlate") int idPlate,@PathParam("idUser") int idUser, Comment comment , @Context final HttpServletResponse response)  {
 	
 		
 		try {
 			
-			Plate plate=plateManager.getById(id);
+			Plate plate=plateManager.getById(idPlate);
 			List<Comment> comments;
 			if(plate.getComments()==null){
 				comments= new ArrayList<>();
 			}else{
 			 comments = plate.getComments();
 			}
-			comments.add(BllManagerFactory.getCommentManager().add(comment));
+			comments.add(BllManagerFactory.getCommentManager().add(comment,idUser));
 			plate.setComments(comments);
 			plateManager.update(plate);
 

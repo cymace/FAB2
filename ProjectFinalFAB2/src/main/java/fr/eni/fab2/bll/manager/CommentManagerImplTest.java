@@ -10,10 +10,17 @@ import fr.eni.fab2.exceptions.BLLException;
  class CommentManagerImplTest implements CommentManager {
 
 	@Override
-	public Comment add(Comment comment) throws BLLException {
-		System.out.println("add comment");
+	public Comment add(Comment comment , int idUser) throws BLLException {
+		
 		comment = new Comment();
 		comment.setId(1);
+		comment.setUser(BllManagerFactory.getUserManager().getById(idUser));
+		comment.setDateComment(LocalDateTime.now().withNano(0));
+		
+		System.out.println("add comment");
+	
+		
+		
 		return comment;
 	}
 
@@ -35,6 +42,7 @@ import fr.eni.fab2.exceptions.BLLException;
 
 	@Override
 	public void update(Comment comment) throws BLLException {
+		comment.setDateComment(LocalDateTime.now().withNano(0));
 		System.out.println("update comment");
 	}
 

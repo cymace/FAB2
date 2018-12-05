@@ -1,7 +1,9 @@
+import java.time.LocalDateTime;
 import java.util.List;
 
-import fr.eni.fab2.bean.Restaurant;
+import fr.eni.fab2.bean.Comment;
 import fr.eni.fab2.bean.User;
+import fr.eni.fab2.dao.CommentDAOImpl;
 import fr.eni.fab2.dao.RestaurantDAOImpl;
 import fr.eni.fab2.dao.UserDAOImpl;
 
@@ -9,58 +11,50 @@ public class test {
 
 	public static void main(String[] args) {
 		
-		UserDAOImpl userDao = new UserDAOImpl();
+		UserDAOImpl userDao = new UserDAOImpl();		
+		CommentDAOImpl commentDao = new CommentDAOImpl();		
+		RestaurantDAOImpl restDAO = new RestaurantDAOImpl();
+		ReservationDAOImpl reservDAO = new ReservationDAOImpl();
 		
-		RestaurantDAOImpl restDao = new RestaurantDAOImpl();
+		
+		
+		//RestaurantDAOImpl restDao = new RestaurantDAOImpl();
 		
 		
 		User user1 = new User ("Smith", "John", "065588", "mail", "password", false);
 		User user2 = new User ("Macron", "Emmanuel", "03333", "mail@eliseo", "giletsjeune", false);
+		User user3 = new User ("Sampietro", "Emanuel", "0649008572", "manusamp", "grrr", false);
+		
+		Restaurant rest1 = new Restaurant ("FAB Rennes", String addresse, int numberPlacesMax)
+		
+		LocalDateTime timeNow = LocalDateTime.now();
+		Comment comm1 = new Comment(timeNow, 3, "good", user1);
+		Comment comm2 = new Comment(timeNow, 1, "bleah", user2);
+		
+		Reservation res1 = new Reservation(timeNow, 6, user1);
+		Reservation res2 = new Reservation(timeNow, 10, user3);
 		
 		
-		
-		/*Restaurant rest1 = new Restaurant("FAB_Rennes", "Rennes", 100);
-		System.out.println("rest1: "+rest1.toString());
-		System.out.println("name rest1: "+rest1.getName());
-		System.out.println("Surname user1: "+user1.getSurname());*/
-		
+		userDao.add(user1);
 		userDao.add(user2);
-		
-		//restDao.add(rest1);
-		
-		/*Restaurant restToDelete = new Restaurant();		
-		restToDelete = restDao.selectById(4);
-		System.out.println("deleting restaurant: "+restToDelete.toString());
-		restDao.delete(restToDelete);*/
-		
-		/*Restaurant restToUpdate = new Restaurant();
-		restToUpdate = restDao.selectById(3);
-		restToUpdate.setAddresse("Nantes");
-		restDao.update(restToUpdate);*/
-		
-		List<Restaurant> restaurants = restDao.findAll();
-		
-		for (Restaurant r:restaurants){
-			System.out.println("/nRistorante:/n"+r.toString());
-		}
-		
-		restDao.delete(4);
-		
-		//OrderDAOImpl ord1 =new OrderDAOImpl(valueOf(2007-12-03T10:15:30), user1)
-		
-		List<User> users = userDao.findAll();
-		for (User u:users){
-			System.out.println("/nUser:/n"+u.toString());
-		}
+		userDao.add(user3);
 		
 		
-		userDao.delete(user2.getId());
 		
-		users = userDao.findAll();
+		int idComment1=commentDao.add(comm1);
+		int idComment2=commentDao.add(comm2);
+	
+		System.out.println("idComment1: "+idComment1);
+		System.out.println("idComment2: "+idComment2);
 		
-		for (User u:users){
-			System.out.println("/nUser:/n"+u.toString());
-		}
+		
+
+		
+		User userFindByEmail = userDao.selectByEmail("mail@eliseo");
+		
+		System.out.println("\nUser find by email:\n"+userFindByEmail.toString());
+		
+		
 		
 		
 	

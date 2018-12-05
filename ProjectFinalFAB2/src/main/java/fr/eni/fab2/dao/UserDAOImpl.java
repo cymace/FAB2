@@ -11,7 +11,7 @@ import fr.eni.fab2.exceptions.DAOException;
 
 public class UserDAOImpl implements UserDAO{
 	
-	public void add(User user) {
+	public int add(User user) {
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -22,6 +22,7 @@ public class UserDAOImpl implements UserDAO{
 			et.rollback();
 			//throw new DAOException("Erreur lors de l'ajout du user " + user + " : " + e.getMessage());
 		}
+		return user.getId();
 	}
 	
 	public void update(User user) {
@@ -59,6 +60,14 @@ public class UserDAOImpl implements UserDAO{
 	
 	public User selectById(int id) {
 		return DAOUtil.getEntityManager().find(User.class, id);
+			
+	}
+	
+	public User selectByEmail(String email) {
+		String req = "Select Object(u) from User u WHERE u.mail LIKE :mail";
+		return DAOUtil.getEntityManager().createQuery(req, User.class).setParameter("mail", "%" + email + "%").getSingleResult();
+		
+		
 			
 	}
 

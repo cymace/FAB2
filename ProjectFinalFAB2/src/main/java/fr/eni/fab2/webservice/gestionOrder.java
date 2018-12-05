@@ -17,6 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import fr.eni.fab2.bean.Order;
+import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bll.manager.BllManagerFactory;
 import fr.eni.fab2.bll.manager.OrderManager;
 import fr.eni.fab2.exceptions.BLLException;
@@ -24,6 +25,8 @@ import fr.eni.fab2.exceptions.BLLException;
 
 @Path("/orders")
 public class gestionOrder {	
+	
+	private Order orderTest;
 	
 		private OrderManager orderManager = BllManagerFactory.getOrderManager();
 		
@@ -70,11 +73,11 @@ public class gestionOrder {
 
 		
 		@POST
+		@Path("/idUser={userId:\\d+}&idRestaurant={restaurantsId:\\d+}&idPlate={plateId:\\d+}")
 		@Consumes(MediaType.APPLICATION_JSON)
-		public Order addOrder(Order order , @Context final HttpServletResponse response) {
-        order.setDateOrder(LocalDateTime.now().withNano(0));
+		public Order addOrder(@PathParam("userId") int userId, @PathParam("restaurantsId") int restaurantsId ,@PathParam("plateId") int plateId ,Order order , @Context final HttpServletResponse response) {
 			try {
-				order= orderManager.add(order);
+				order= orderManager.add(order,userId,restaurantsId,plateId);
 			} catch (BLLException e) {
 				System.out.println(e.getMessage());
 				try {
@@ -84,15 +87,42 @@ public class gestionOrder {
 				}		}
 			
 			
+			return order;
+		}
+		@POST
+		@Path("/addPlate/idOrder={orderId}&idPlate={plateId:\\d+}")
+		@Consumes(MediaType.APPLICATION_JSON)
+		public Order addPlate( @PathParam("orderId") int orderId ,@PathParam("plateId") int plateId, @Context final HttpServletResponse response){
+			Order order = null;
+			try {
+				
+				order = orderManager.getById(orderId);
+				
+					
+				
+				order = orderManager.addPlate(order, plateId);;
+				
+				
+			} catch (BLLException e) {
+				try {
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				} catch (IOException ex) {
+					System.out.println(ex.getMessage());
+				}	
+			}
 			
 			return order;
+		
 		}
 		
 		@PUT
+		@Path("/idOrder={orderId}")
 		@Consumes(MediaType.APPLICATION_JSON)
-		public Order updateOrder(Order orderUpdate, @Context final HttpServletResponse response){
-			orderUpdate.setDateOrder(LocalDateTime.now().withNano(0));
-
+		public Order updateOrder( @PathParam("orderId") int orderId, Order orderUpdate, @Context final HttpServletResponse response){
+			
+			orderUpdate.setId(orderId);
+			
+						
 			
 			try {
 				orderManager.update(orderUpdate);
