@@ -1,0 +1,22 @@
+<!doctype html>
+<html ng-app="helloApp">
+<head>
+</head>
+<body>
+<h1>Introduction à AngularJS</h1>
+
+<div ng-controller="peopleCtrl">
+    <label>Afficher les personnes ?</label>
+    <input type="checkbox" ng-model="showPeople">
+    <ul ng-show="showPeople">
+        <li ng-repeat="person in people">
+            {{ person.firstname }} {{ person.lastname }}
+        </li>
+    </ul>
+    <p ng-hide="showPeople">Il n'y a personne de visible.</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+<script src="testang.js"></script>
+</body>
+</html>
