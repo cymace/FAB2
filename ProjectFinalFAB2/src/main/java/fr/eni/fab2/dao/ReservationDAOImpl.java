@@ -34,7 +34,7 @@ public class ReservationDAOImpl implements ReservationDAO{
 			et.commit();
 		} catch (Exception e) {
 			et.rollback();
-			//throw new DAOException("Erreur lors de l'update du reservation " + reservation + " : " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
