@@ -46,6 +46,7 @@ public class GestionComment {
 				System.out.println(ex.getMessage());
 			}		}
 		
+		
 		return comments;
 		
 	}
@@ -96,7 +97,10 @@ public class GestionComment {
 	@Path("/plateId={idPlate:\\d+}&userId={idUser:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Comment addComment(@PathParam("idPlate") int idPlate,@PathParam("idUser") int idUser, Comment comment , @Context final HttpServletResponse response)  {
-					
+		
+		if(comment == null){
+			comment= new Comment();
+		}		
 			try {
 				
 				Plate plate=BllManagerFactory.getPlateManager().getById(idPlate);

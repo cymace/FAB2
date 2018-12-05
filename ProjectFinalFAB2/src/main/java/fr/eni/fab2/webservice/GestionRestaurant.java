@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.bll.manager.BllManagerFactory;
 import fr.eni.fab2.bll.manager.RestaurantManager;
@@ -87,6 +88,27 @@ public class GestionRestaurant {
 				System.out.println(ex.getMessage());
 			}		}
 		
+		
+		
+		return restaurant;
+	}
+	
+	@POST
+	@Path("/idRestaurant={restaurantId:\\d+}&idPlate={plateId:\\d+}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Restaurant addPlate(@PathParam("restaurantId") int restaurantId,@PathParam("plateId") int plateId, @Context final HttpServletResponse response) {
+		
+		Restaurant restaurant = null;
+		try {
+			restaurant = restaurantManager.addPlate(restaurantId, plateId);
+			
+			} catch (BLLException e) {
+				System.out.println(e.getMessage());
+				try {
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				} catch (IOException ex) {
+					System.out.println(ex.getMessage());
+				}		}
 		
 		
 		return restaurant;

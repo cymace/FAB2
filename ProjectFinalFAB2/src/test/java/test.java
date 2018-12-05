@@ -2,13 +2,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.eni.fab2.bean.Comment;
+import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.bean.User;
 import fr.eni.fab2.dao.CommentDAOImpl;
+import fr.eni.fab2.dao.ReservationDAOImpl;
 import fr.eni.fab2.dao.RestaurantDAOImpl;
 import fr.eni.fab2.dao.UserDAOImpl;
 
 public class test {
-
+/*
 	public static void main(String[] args) {
 		
 		UserDAOImpl userDao = new UserDAOImpl();		
@@ -65,5 +67,5 @@ public class test {
 		
 		
 	
-}
+}*/
 }

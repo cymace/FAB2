@@ -94,6 +94,9 @@ public class GestionUser {
 		@Consumes(MediaType.APPLICATION_JSON)
 		public User addUser(User user , @Context final HttpServletResponse response) {
 			
+			if(user==null){
+				user=new User();
+			}
 			try {
 				user= userManager.add(user);
 			} catch (BLLException e) {

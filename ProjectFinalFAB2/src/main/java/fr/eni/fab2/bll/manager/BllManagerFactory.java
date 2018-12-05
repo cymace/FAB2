@@ -7,7 +7,7 @@ public abstract class BllManagerFactory {
 	
 	public static CommentManager getCommentManager()
 	{
-		return new CommentManagerImplTest();
+		return new CommentManagerImpl();
 	}
 	
 	public static OrderManager getOrderManager()
@@ -32,7 +32,7 @@ public abstract class BllManagerFactory {
 	
 	public static UserManager getUserManager()
 	{
-		return new UserManagerImplTest();
+		return new UserManagerImpl();
 	}
 	
 }

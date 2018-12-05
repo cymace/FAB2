@@ -101,10 +101,12 @@ public class GestionPlats {
 	@Path("/restaurants={id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Plate addPlate(@PathParam("id") int idRestaurant, Plate plate , @Context final HttpServletResponse response) {
-		
+		if(plate==null){
+			plate =new Plate();
+		}
 		try {
 						
-			plate= plateManager.add(new Plate() , idRestaurant);
+			plate= plateManager.add(plate , idRestaurant);
 			
 		} catch (BLLException e) {
 			System.out.println(e.getMessage());
@@ -119,7 +121,7 @@ public class GestionPlats {
 		
 		return plate;
 	}
-	
+	/*
 	@POST
 	@Path("/addComments/plateId={idPlate:\\d+}&userId={idUser:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -151,6 +153,7 @@ public class GestionPlats {
 		return comment;
 		
 	}
+	*/
 	
 	@PUT
 	@Path("/{id:\\d+}")

@@ -9,6 +9,8 @@ import fr.eni.fab2.exceptions.BLLException;
 public interface RestaurantManager {
 	
 	 public Restaurant add(Restaurant restaurant) throws BLLException;
+	 
+	 public Restaurant addPlate(int restaurantId, int plateId) throws BLLException; //a ne pas ajouter dans la DAo service uniquement BLL
 		
 		public void delete(Restaurant restaurant) throws BLLException;
 		
