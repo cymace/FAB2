@@ -21,7 +21,7 @@ public class Reservation implements Serializable{
 	private LocalDateTime dateReservation;
 	private int numPlaces;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private User user;
 
 	public Reservation() {
