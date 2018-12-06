@@ -10,12 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
+
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.annotate.JsonManagedReference;
+
 
 @Entity
 public class Plate implements Serializable{
@@ -73,8 +72,6 @@ private static final long serialVersionUID = 1L;
 		this.name = name;
 		this.imagePlate = imagePlate;
 		this.prix = prix;
-		this.comments = comments;
-		this.orders = orders;
 	}
 
 	public int getId() {
