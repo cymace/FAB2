@@ -1,5 +1,6 @@
 package fr.eni.fab2.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+
+
 @Entity
 public class Reservation implements Serializable{
 	
@@ -18,6 +21,8 @@ public class Reservation implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+
 	private LocalDateTime dateReservation;
 	private int numPlaces;
 	
@@ -26,6 +31,7 @@ public class Reservation implements Serializable{
 
 	public Reservation() {
 		super();
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -47,10 +53,15 @@ public class Reservation implements Serializable{
 	public LocalDateTime getDateReservation() {
 		return dateReservation;
 	}
-
-	public void setDateReservation(LocalDateTime dateReservation) {
-		this.dateReservation = dateReservation;
+	
+	public void setDateReservation (LocalDateTime dateReservation) {
+		this.dateReservation =dateReservation;
 	}
+/*public void setDateReservation(String dateReservation) {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	
+		this.dateReservation = LocalDateTime.parse(dateReservation, formatter);
+	}*/
 
 	public int getNumPlaces() {
 		return numPlaces;
@@ -79,3 +90,4 @@ public class Reservation implements Serializable{
 	
 
 }
+

@@ -3,11 +3,13 @@ package fr.eni.fab2.bll.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.fab2.bean.Order;
 import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.dao.DaoFactory;
 import fr.eni.fab2.dao.PlateDAO;
 import fr.eni.fab2.exceptions.BLLException;
+import fr.eni.fab2.exceptions.DAOException;
 
 public class PlateManagerImpl implements PlateManager {
 
@@ -21,13 +23,13 @@ public class PlateManagerImpl implements PlateManager {
 		List<Restaurant> restaurants;
 		List<Plate> plates;
 
-		if (restaurant.getPlates() == null) {
+		if (plate.getRestaurants() == null) {
 			restaurants = new ArrayList<>();
 		} else {
 			restaurants = plate.getRestaurants();
 		}
 
-		if (plate.getRestaurants() == null) {
+		if (restaurant.getPlates() == null) {
 			plates = new ArrayList<>();
 		} else {
 			plates = restaurant.getPlates();
@@ -52,18 +54,41 @@ public class PlateManagerImpl implements PlateManager {
 
 	@Override
 	public void delete(Plate plate) throws BLLException {
+
 		try {
 			plateDao.delete(plate.getId());
-		} catch (Exception e) {
-		throw new BLLException(e.getMessage());
-		}
 		
+		for (Restaurant restaurant : plate.getRestaurants()){
+		List<Plate> plates=	restaurant.getPlates();
+		plates.remove(restaurant.getPlates().indexOf(plate));
+		restaurant.setPlates(plates);
+		BllManagerFactory.getRestaurantManager().update(restaurant);		
+		}
+		for(Order order : plate.getOrders()){
+			List<Plate> plates=	order.getPlates();
+			plates.remove(order.getPlates().indexOf(plate));
+			order.setPlates(plates);
+			BllManagerFactory.getOrderManager().update(order);	
+		}
+		plateDao.delete(plate.getId());
+		} catch (Exception e) {
+			throw new BLLException(e.getMessage());
+			}
+			
+
 	}
 
 	@Override
 	public Plate getById(int id) throws BLLException {
-		// Plate plate = plateDao.findbyId(id)
-		return null;
+		 Plate plate;
+		try {
+			plate = plateDao.selectById(id);
+		} catch (DAOException e) {
+		
+			throw new BLLException(e.getMessage());
+			}
+		
+		return plate;
 	}
 
 	@Override
@@ -89,8 +114,20 @@ public class PlateManagerImpl implements PlateManager {
 
 	@Override
 	public List<Plate> getByRestaurant(Restaurant restaurant) throws BLLException {
-		//List<Plate> plates = plateDao.findByRestaurant(restaurant);
-		return null;
+		List<Plate> plates;
+		try {
+			plates = plateDao.selectByRestaurant(restaurant);
+		} catch (DAOException e) {
+			throw new BLLException(e.getMessage());
+		
+		}
+		return plates;
+	}
+
+	@Override
+	public List<Plate> getByOrder(Order order) throws BLLException {
+				List<Plate> plates = order.getPlates();
+		return plates;
 	}
 
 }

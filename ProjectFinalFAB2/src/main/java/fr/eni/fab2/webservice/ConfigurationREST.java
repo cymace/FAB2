@@ -5,7 +5,6 @@ import javax.ws.rs.core.Application;
 
 @ApplicationPath("/")
 public class ConfigurationREST extends Application{
-	
-	
+		
 	
 }

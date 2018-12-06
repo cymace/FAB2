@@ -72,12 +72,38 @@ public class GestionRestaurant {
 		
 	}	
 	
+	@GET
+	@Path("/{restaurantId:\\d+}/plates")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<Plate> getPlatesByRestaurant(@PathParam("restaurantId") int restaurantId,
+			@Context final HttpServletResponse response) {
+		List<Plate> plates = new ArrayList<>();
+
+		try {
+
+			plates = BllManagerFactory.getPlateManager().getByRestaurant(restaurantManager.getById(restaurantId));
+		} catch (BLLException e) {
+			System.out.println(e.getMessage());
+			try {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			} catch (IOException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+
+		return plates;
+
+	}
+
+	
 
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Restaurant addRestaurant(Restaurant restaurant , @Context final HttpServletResponse response) {
-		
+		if(restaurant == null){
+			restaurant= new Restaurant();
+		}
 		try {
 			restaurant= restaurantManager.add(restaurant);
 		} catch (BLLException e) {

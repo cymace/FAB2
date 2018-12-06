@@ -11,9 +11,11 @@ import fr.eni.fab2.bean.User;
 import fr.eni.fab2.dao.OrderDAO;
 import fr.eni.fab2.dao.DaoFactory;
 import fr.eni.fab2.exceptions.BLLException;
+import fr.eni.fab2.exceptions.DAOException;
 
 public class OrderManagerImpl implements OrderManager {
 	OrderDAO orderDao = DaoFactory.getOrderDAO();
+	
 
 	@Override
 	public Order add(Order order, int userId, int restaurantsId, int plateId) throws BLLException {
@@ -67,17 +69,37 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public void delete(Order order) throws BLLException {
+
 		try {
-			orderDao.delete(order.getId());
-		} catch (Exception e) {
-		throw new BLLException(e.getMessage());
-		}
 		
+		for(Plate plate : order.getPlates()){
+			List<Order> orders=	plate.getOrders();
+			orders.remove(plate.getOrders().indexOf(order));
+			plate.setOrders(orders);
+			BllManagerFactory.getPlateManager().update(plate);	
+		}
+		Restaurant restaurant = order.getRestaurant();
+		List<Order> orders= restaurant.getOrders();
+		orders.remove(restaurant.getOrders().indexOf(order));
+		restaurant.setOrders(orders);
+		BllManagerFactory.getRestaurantManager().update(restaurant);	
+		orderDao.delete(order.getId());
+		} catch (Exception e) {
+			throw new BLLException(e.getMessage());
+			}
+
 	}
 
 	@Override
 	public Order getById(int id) throws BLLException {
-		return null;
+		Order order;
+		try {
+			order = orderDao.selectById(id);
+		} catch (DAOException e) {
+			throw new BLLException(e.getMessage());
+		}
+		
+		return order;
 	}
 
 	@Override

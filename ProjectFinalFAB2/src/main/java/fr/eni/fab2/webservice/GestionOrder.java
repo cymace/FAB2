@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 
 import fr.eni.fab2.bean.Order;
 import fr.eni.fab2.bean.Plate;
+import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.bll.manager.BllManagerFactory;
 import fr.eni.fab2.bll.manager.OrderManager;
 import fr.eni.fab2.exceptions.BLLException;
@@ -70,12 +71,63 @@ public class GestionOrder {
 			return order;
 			
 		}
+		
+		@GET
+		@Path("/{orderId:\\d+}/plates")
+		@Consumes(MediaType.APPLICATION_JSON)
+		public List<Plate> getPlatesByOrder(@PathParam("orderId") int orderId,
+				@Context final HttpServletResponse response) {
+			List<Plate> plates = new ArrayList<>();
+
+			try {
+
+				plates = BllManagerFactory.getPlateManager().getByOrder(orderManager.getById(orderId));
+			} catch (BLLException e) {
+				System.out.println(e.getMessage());
+				try {
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				} catch (IOException ex) {
+					System.out.println(ex.getMessage());
+				}
+			}
+
+			return plates;
+
+		}
+		
+		@GET
+		@Path("/{restaurantId:\\d+}/restaurants")
+		@Consumes(MediaType.APPLICATION_JSON)
+		public Restaurant getRestaurantByOrder(@PathParam("restaurantId") int orderId,
+				@Context final HttpServletResponse response) {
+			Restaurant restaurant = null;
+
+			try {
+
+				restaurant = BllManagerFactory.getRestaurantManager().getByOrder(orderManager.getById(orderId));
+			} catch (BLLException e) {
+				System.out.println(e.getMessage());
+				try {
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				} catch (IOException ex) {
+					System.out.println(ex.getMessage());
+				}
+			}
+
+			return restaurant;
+
+		}
 
 		
 		@POST
 		@Path("/idUser={userId:\\d+}&idRestaurant={restaurantsId:\\d+}&idPlate={plateId:\\d+}")
 		@Consumes(MediaType.APPLICATION_JSON)
 		public Order addOrder(@PathParam("userId") int userId, @PathParam("restaurantsId") int restaurantsId ,@PathParam("plateId") int plateId ,Order order , @Context final HttpServletResponse response) {
+			
+			if(order ==null){
+				order= new Order();
+			}
+			
 			try {
 				order= orderManager.add(order,userId,restaurantsId,plateId);
 			} catch (BLLException e) {

@@ -3,6 +3,7 @@ package fr.eni.fab2.bll.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.fab2.bean.Order;
 import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.exceptions.BLLException;
@@ -54,6 +55,12 @@ class RestaurantManagerImplTest implements RestaurantManager {
 		restaurants.add(new Restaurant("monResto", "8 rue leo lagrange", 150, null, null));
 
 		return restaurants;
+	}
+
+	@Override
+	public Restaurant getByOrder(Order order) throws BLLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

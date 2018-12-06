@@ -3,7 +3,8 @@ package fr.eni.fab2.webservice;
 
 	import java.io.IOException;
 	import java.time.LocalDateTime;
-	import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 	import java.util.List;
 
 	import javax.servlet.http.HttpServletResponse;
@@ -73,12 +74,17 @@ import fr.eni.fab2.bll.manager.BllManagerFactory;
 
 		
 		@POST
-		@Path("/idUser={userId:\\d+}&idRestaurant=(restaurantId:\\d+}")
+		@Path("/idUser={userId:\\d+}&idRestaurant={restaurantId:\\d+}")
 		@Consumes(MediaType.APPLICATION_JSON)
-		public Reservation addReservation(@PathParam("userId") int userId,@PathParam("restaurantId") int restaurantId,Reservation reservation , @Context final HttpServletResponse response) {
+		public Reservation addReservation(@PathParam("userId") int userId,@PathParam("restaurantId") int restaurantId,ReservationMapping reservationMapping, @Context final HttpServletResponse response) {
+								
+			if(reservationMapping == null){
+				reservationMapping= new ReservationMapping();
+			}
 			
-		
+			Reservation reservation = reservationMapping.getReservation();
 			try {
+				
 				Restaurant restaurant = BllManagerFactory.getRestaurantManager().getById(restaurantId);
 				List<Reservation> reservations =(restaurant.getReservations()==null)? new ArrayList<>(): restaurant.getReservations();
 				
