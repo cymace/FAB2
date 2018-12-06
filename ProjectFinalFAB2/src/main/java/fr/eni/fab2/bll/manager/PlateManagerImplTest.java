@@ -101,4 +101,10 @@ class PlateManagerImplTest implements PlateManager {
 		return plates;
 	}
 
+	@Override
+	public List<Plate> getByOrder(Order order) throws BLLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

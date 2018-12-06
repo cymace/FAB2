@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.annotate.*;
 
 @Entity
 public class Restaurant implements Serializable{
@@ -36,7 +36,7 @@ private static final long serialVersionUID = 1L;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
 	@Basic(fetch=FetchType.LAZY)
-	@JsonManagedReference
+	@JsonIgnore
 	List<Plate> plates;
 
 	public Restaurant() {

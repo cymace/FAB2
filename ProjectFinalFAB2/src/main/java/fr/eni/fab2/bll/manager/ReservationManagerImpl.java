@@ -13,7 +13,7 @@ public class ReservationManagerImpl implements ReservationManager {
 
 	@Override
 	public Reservation add(Reservation reservation, int userId) throws BLLException {
-		reservation.setDateReservation(LocalDateTime.now().withNano(0));
+		//reservation.setDateReservation(LocalDateTime.now().withNano(0));
 		reservation.setUser(BllManagerFactory.getUserManager().getById(userId));
 		int id = reservationDAO.add(reservation);
 		reservation = this.getById(id);

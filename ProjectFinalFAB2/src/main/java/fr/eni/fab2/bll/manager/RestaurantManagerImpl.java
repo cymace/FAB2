@@ -3,6 +3,7 @@ package fr.eni.fab2.bll.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.fab2.bean.Order;
 import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.dao.DaoFactory;
@@ -41,6 +42,12 @@ public class RestaurantManagerImpl implements RestaurantManager {
 
 	@Override
 	public void delete(Restaurant restaurant) throws BLLException {
+		for(Plate plate : restaurant.getPlates()){
+			List<Restaurant> restaurants=plate.getRestaurants();
+			restaurants.remove(plate.getOrders().indexOf(restaurant));
+			plate.setRestaurants(restaurants);
+			BllManagerFactory.getPlateManager().update(plate);	
+		}
 		restaurantDAO.delete(restaurant.getId());
 	}
 
@@ -61,6 +68,15 @@ public class RestaurantManagerImpl implements RestaurantManager {
 	public List<Restaurant> getAll() throws BLLException {
 		List<Restaurant> restaurants = restaurantDAO.findAll();
 		return restaurants;
+	}
+
+	@Override
+	public Restaurant getByOrder(Order order) throws BLLException {
+		Restaurant restaurant = order.getRestaurant();
+
+		return restaurant;
+		
+	
 	}
 
 }
