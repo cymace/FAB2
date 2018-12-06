@@ -40,7 +40,12 @@ public class RestaurantManagerImpl implements RestaurantManager {
 
 	@Override
 	public void delete(Restaurant restaurant) throws BLLException {
-restaurantDAO.delete(restaurant.getId());
+		try {
+			restaurantDAO.delete(restaurant.getId());
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+		
 	}
 
 	@Override

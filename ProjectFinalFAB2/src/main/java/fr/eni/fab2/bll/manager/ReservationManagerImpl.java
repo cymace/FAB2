@@ -15,14 +15,23 @@ public class ReservationManagerImpl implements ReservationManager {
 	public Reservation add(Reservation reservation, int userId) throws BLLException {
 		reservation.setDateReservation(LocalDateTime.now().withNano(0));
 		reservation.setUser(BllManagerFactory.getUserManager().getById(userId));
-		int id = reservationDAO.add(reservation);
-		reservation = this.getById(id);
-		return reservation;
+		try {
+			int id = reservationDAO.add(reservation);
+			reservation = this.getById(id);
+			
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}	
+		return reservation;	
 	}
 
 	@Override
 	public void delete(Reservation reservation) throws BLLException {
-		reservationDAO.delete(reservation.getId());
+		try {
+			reservationDAO.delete(reservation.getId());
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}			
 	}
 
 	@Override
@@ -33,12 +42,22 @@ public class ReservationManagerImpl implements ReservationManager {
 
 	@Override
 	public void update(Reservation reservation) throws BLLException {
-		reservationDAO.update(reservation);
+		try {
+			reservationDAO.update(reservation);
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}	
+	
 	}
 
 	@Override
 	public List<Reservation> getAll() throws BLLException {
-		List<Reservation> reservations = reservationDAO.findAll();
+		List<Reservation> reservations;
+		try {
+			reservations = reservationDAO.findAll();
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
 		return reservations;
 	}
 

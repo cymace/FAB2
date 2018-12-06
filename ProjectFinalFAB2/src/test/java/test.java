@@ -121,7 +121,7 @@ public class test {
 		Restaurant rist1 = restDAO.selectById(1);
 		Restaurant rist3 = restDAO.selectById(3);
 		
-		List<Plate> platesRist1 = plaDAO.selectByRestaurant(rist1);
+		List<Plate> platesRist1 = rist1.getPlates()
 		List<Plate> platesRist3 = plaDAO.selectByRestaurant(rist3);
 		
 		for (Plate pl:platesRist1){

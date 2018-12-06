@@ -33,8 +33,13 @@ public class OrderManagerImpl implements OrderManager {
 		plates.add(plate);
 		order.setPlates(plates);
 
-		int id = orderDao.add(order);
-		order = this.getById(id);
+		try {
+			int id = orderDao.add(order);
+			order = this.getById(id);
+		} catch (Exception e) {
+			throw new BLLException(e.getMessage());
+			}
+		
 
 		List<Order> ordersResto;
 		List<Order> ordersPlates;
@@ -62,7 +67,12 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public void delete(Order order) throws BLLException {
-		orderDao.delete(order.getId());
+		try {
+			orderDao.delete(order.getId());
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+		
 	}
 
 	@Override
@@ -72,12 +82,24 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public void update(Order order) throws BLLException {
-		orderDao.update(order);
+		try{
+			orderDao.update(order);
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+		
 	}
 
 	@Override
 	public List<Order> getAll() throws BLLException {
-		return orderDao.findAll();
+		List<Order> orders;
+		try {
+			orders=orderDao.findAll();
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+		return orders;
+		
 	}
 
 }

@@ -36,9 +36,13 @@ public class PlateManagerImpl implements PlateManager {
 		restaurants.add(restaurant);
 		plate.setRestaurants(restaurants);
 
-		int idplate = plateDao.add(plate);
-		plate = this.getById(idplate);
-
+		try {
+			int idplate = plateDao.add(plate);
+			plate = this.getById(idplate);
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+		
 		plates.add(plate);
 		restaurant.setPlates(plates);
 		restaurantManager.update(restaurant);
@@ -48,7 +52,12 @@ public class PlateManagerImpl implements PlateManager {
 
 	@Override
 	public void delete(Plate plate) throws BLLException {
-		plateDao.delete(plate.getId());
+		try {
+			plateDao.delete(plate.getId());
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+		
 	}
 
 	@Override
@@ -59,12 +68,22 @@ public class PlateManagerImpl implements PlateManager {
 
 	@Override
 	public void update(Plate plate) throws BLLException {
-		plateDao.update(plate);
+		try {
+			plateDao.update(plate);
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+		
 	}
 
 	@Override
 	public List<Plate> getAll() throws BLLException {
-		List<Plate> plates = plateDao.findAll();
+		List<Plate> plates;
+		try {
+			plates = plateDao.findAll();
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
 		return plates;
 	}
 

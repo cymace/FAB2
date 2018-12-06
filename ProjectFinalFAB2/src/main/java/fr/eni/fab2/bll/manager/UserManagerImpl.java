@@ -12,37 +12,66 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public User add(User user) throws BLLException {
-		int id = userDAO.add(user);
-		user = this.getById(id);
-
+		try {
+			int id = userDAO.add(user);
+			user = this.getById(id);
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+		
 		return user;
 	}
 
 	@Override
 	public void delete(User user) throws BLLException {
-		userDAO.delete(user.getId());
+		try {
+			userDAO.delete(user.getId());
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+		
 	}
 
 	@Override
 	public User getById(int id) throws BLLException {
-		User user = userDAO.selectById(id);
-		return user;
+		User user;
+		try {
+			user = userDAO.selectById(id);
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+	return user;
 	}
 
 	@Override
 	public void update(User user) throws BLLException {
-		userDAO.update(user);
+		try {
+			userDAO.update(user);
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		}
+
 	}
 
 	@Override
 	public List<User> getAll() throws BLLException {
-		List<User> users = userDAO.findAll();
+		List<User> users;
+		try {
+			users = userDAO.findAll();
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		} 
 		return users;
 	}
 
 	@Override
 	public User getByEmail(String email) throws BLLException {
-		User user = userDAO.selectByEmail(email);
+		User user;
+		try {
+			user = userDAO.selectByEmail(email);
+		} catch (Exception e) {
+		throw new BLLException(e.getMessage());
+		} 
 		return user;
 	}
 
