@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -72,6 +71,7 @@ private static final long serialVersionUID = 1L;
 		this.name = name;
 		this.imagePlate = imagePlate;
 		this.prix = prix;
+	
 	}
 
 	public int getId() {
