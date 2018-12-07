@@ -94,7 +94,7 @@ public class GestionComment {
 	*/
 	
 	@POST
-	@Path("/plateId={idPlate:\\d+}&userId={idUser:\\d+}")
+	@Path("/plateId={idPlate:\\d+}userId={idUser:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Comment addComment(@PathParam("idPlate") int idPlate,@PathParam("idUser") int idUser, Comment comment , @Context final HttpServletResponse response)  {
 		
@@ -113,6 +113,7 @@ public class GestionComment {
 				comment = commentManager.add(comment,idUser);
 				comments.add(comment);
 				plate.setComments(comments);
+				
 				BllManagerFactory.getPlateManager().update(plate);
 
 			} catch (BLLException e) {

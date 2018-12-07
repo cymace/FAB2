@@ -31,7 +31,7 @@ public class PlateDAOImpl implements PlateDAO{
 		EntityManager em = DAOUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-		try {
+		try {			
 			em.merge(plate);
 			et.commit();
 		} catch (Exception e) {

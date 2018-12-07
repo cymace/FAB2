@@ -32,15 +32,15 @@ private static final long serialVersionUID = 1L;
 	
 	LocalDateTime dateOrder;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne
 	private User user;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany
 	@Basic(fetch=FetchType.LAZY)
 	 @JsonIgnore
 	private List<Plate> plates;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@Basic(fetch=FetchType.LAZY)
 	 @JsonIgnore
 	private Restaurant restaurant;

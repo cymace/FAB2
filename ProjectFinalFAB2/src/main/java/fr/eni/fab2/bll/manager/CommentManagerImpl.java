@@ -19,8 +19,7 @@ class CommentManagerImpl implements CommentManager {
 		int id ;
 		try {
 			 id = commentDao.add(comment);
-		
-		} catch (Exception e) {
+				} catch (Exception e) {
 		throw new BLLException(e.getMessage());
 		}		
 		return this.getById(id);

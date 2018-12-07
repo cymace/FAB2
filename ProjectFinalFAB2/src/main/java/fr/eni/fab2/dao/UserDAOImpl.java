@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.bean.User;
 import fr.eni.fab2.exceptions.DAOException;
 

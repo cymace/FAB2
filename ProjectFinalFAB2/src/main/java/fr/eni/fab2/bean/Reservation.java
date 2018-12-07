@@ -1,10 +1,8 @@
 package fr.eni.fab2.bean;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +24,7 @@ public class Reservation implements Serializable{
 	private LocalDateTime dateReservation;
 	private int numPlaces;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne
 	private User user;
 
 	public Reservation() {

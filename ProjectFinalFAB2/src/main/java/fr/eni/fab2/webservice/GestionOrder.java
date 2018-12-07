@@ -122,11 +122,14 @@ public class GestionOrder {
 		@POST
 		@Path("/idUser={userId:\\d+}&idRestaurant={restaurantsId:\\d+}&idPlate={plateId:\\d+}")
 		@Consumes(MediaType.APPLICATION_JSON)
-		public Order addOrder(@PathParam("userId") int userId, @PathParam("restaurantsId") int restaurantsId ,@PathParam("plateId") int plateId ,Order order , @Context final HttpServletResponse response) {
+		public Order addOrder(@PathParam("userId") int userId, @PathParam("restaurantsId") int restaurantsId ,@PathParam("plateId") int plateId , @Context final HttpServletResponse response) {
 			
-			if(order ==null){
-				order= new Order();
-			}
+			
+				Order order= new Order();
+				
+				
+				
+			
 			
 			try {
 				order= orderManager.add(order,userId,restaurantsId,plateId);

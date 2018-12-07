@@ -52,6 +52,7 @@ public class CommentDAOImpl implements CommentDAO{
 			et.rollback();
 			throw new DAOException("Erreur lors de la delete du comment : "+ e.getMessage());
 		}
+		
 		em.close();
 	}
 	
