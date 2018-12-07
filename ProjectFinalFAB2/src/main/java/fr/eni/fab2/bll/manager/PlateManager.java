@@ -2,6 +2,7 @@ package fr.eni.fab2.bll.manager;
 
 import java.util.List;
 
+import fr.eni.fab2.bean.Order;
 import fr.eni.fab2.bean.Plate;
 import fr.eni.fab2.bean.Restaurant;
 import fr.eni.fab2.exceptions.BLLException;
@@ -19,5 +20,7 @@ public interface PlateManager {
 	public List<Plate> getAll() throws BLLException;
 	
 	public List<Plate> getByRestaurant(Restaurant restaurant) throws BLLException;
+	
+	public List<Plate> getByOrder (Order order) throws BLLException;
 
 }

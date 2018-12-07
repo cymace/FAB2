@@ -7,32 +7,32 @@ public abstract class BllManagerFactory {
 	
 	public static CommentManager getCommentManager()
 	{
-		return new CommentManagerImplTest();
+		return new CommentManagerImpl();
 	}
 	
 	public static OrderManager getOrderManager()
 	{
-		return new OrderManagerImplTest();
+		return new OrderManagerImpl();
 	}
 	
 	public static PlateManager getPlateManager()
 	{
-		return new PlateManagerImplTest();
+		return new PlateManagerImpl();
 	}
 	
 	public static ReservationManager getReservationManager()
 	{
-		return new ReservationManagerImplTest();
+		return new ReservationManagerImpl();
 	}
 	
 	public static RestaurantManager getRestaurantManager()
 	{
-		return new RestaurantManagerImplTest();
+		return new RestaurantManagerImpl();
 	}
 	
 	public static UserManager getUserManager()
 	{
-		return new UserManagerImplTest();
+		return new UserManagerImpl();
 	}
 	
 }

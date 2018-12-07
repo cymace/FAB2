@@ -28,7 +28,13 @@ dependencies {
 	compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
 	compile group: 'org.codehaus.jackson', name: 'jackson-jaxrs', version: '1.9.13'
 	compile group: 'org.codehaus.jackson', name: 'jackson-xc', version: '1.9.13'
-	
+	/*compile (
+   [group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.4.1'],
+   [group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.4.1'],
+   [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.1'],
+   [group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.4.1']
+      )*/
+       
 	
 	 providedCompile 'com.google.appengine:appengine:+'
   compile 'javax.ws.rs:javax.ws.rs-api:2.1'  

@@ -24,7 +24,7 @@ import fr.eni.fab2.exceptions.BLLException;
 
 
 @Path("/comments")
-public class gestionComment {
+public class GestionComment {
 	
 	private CommentManager commentManager = BllManagerFactory.getCommentManager();
 	
@@ -45,6 +45,7 @@ public class gestionComment {
 			} catch (IOException ex) {
 				System.out.println(ex.getMessage());
 			}		}
+		
 		
 		return comments;
 		
@@ -93,10 +94,13 @@ public class gestionComment {
 	*/
 	
 	@POST
-	@Path("/plateId={idPlate:\\d+}&userId={idUser:\\d+}")
+	@Path("/plateId={idPlate:\\d+}userId={idUser:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Comment addComment(@PathParam("idPlate") int idPlate,@PathParam("idUser") int idUser, Comment comment , @Context final HttpServletResponse response)  {
-					
+		
+		if(comment == null){
+			comment= new Comment();
+		}		
 			try {
 				
 				Plate plate=BllManagerFactory.getPlateManager().getById(idPlate);
@@ -106,8 +110,10 @@ public class gestionComment {
 				}else{
 				 comments = plate.getComments();
 				}
-				comments.add(commentManager.add(comment,idUser));
+				comment = commentManager.add(comment,idUser);
+				comments.add(comment);
 				plate.setComments(comments);
+				
 				BllManagerFactory.getPlateManager().update(plate);
 
 			} catch (BLLException e) {

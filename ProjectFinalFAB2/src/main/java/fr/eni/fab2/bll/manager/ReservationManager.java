@@ -8,7 +8,7 @@ import fr.eni.fab2.exceptions.BLLException;
 public interface ReservationManager {
 
 
-    public Reservation add(Reservation reservation) throws BLLException;
+    public Reservation add(Reservation reservation,int userId) throws BLLException;
 	
 	public void delete(Reservation reservation) throws BLLException;
 	

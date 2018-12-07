@@ -15,6 +15,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+
+
+
 @Entity
 @Table(name = "Order_DB")
 public class Order implements Serializable{
@@ -27,15 +32,17 @@ private static final long serialVersionUID = 1L;
 	
 	LocalDateTime dateOrder;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne
 	private User user;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany
 	@Basic(fetch=FetchType.LAZY)
+	 @JsonIgnore
 	private List<Plate> plates;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@Basic(fetch=FetchType.LAZY)
+	 @JsonIgnore
 	private Restaurant restaurant;
 	
 

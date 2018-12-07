@@ -23,20 +23,16 @@ import fr.eni.fab2.bll.manager.PlateManager;
 import fr.eni.fab2.exceptions.BLLException;
 
 @Path("/plates")
-public class gestionPlats {
-	
-	
-	
+public class GestionPlats {
+
 	private PlateManager plateManager = BllManagerFactory.getPlateManager();
-	
+
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Plate> getplates(@Context final HttpServletResponse response)  {
-		
-		
-		List<Plate> plates=new ArrayList<>();		
-		
-		
+	public List<Plate> getplates(@Context final HttpServletResponse response) {
+
+		List<Plate> plates = new ArrayList<>();
+
 		try {
 			plates = plateManager.getAll();
 		} catch (BLLException e) {
@@ -47,17 +43,17 @@ public class gestionPlats {
 				System.out.println(ex.getMessage());
 			}
 		}
-		
+
 		return plates;
-		
+
 	}
-	
+
 	@GET
 	@Path("/{id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Plate getPlate(@PathParam("id") int id, @Context final HttpServletResponse response)  {
+	public Plate getPlate(@PathParam("id") int id, @Context final HttpServletResponse response) {
 		Plate plate = null;
-		
+
 		try {
 			plate = plateManager.getById(id);
 		} catch (BLLException e) {
@@ -66,78 +62,26 @@ public class gestionPlats {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			} catch (IOException ex) {
 				System.out.println(ex.getMessage());
-			}		}
-		
-		return plate;
-		
-	}
-	
-	@GET
-	@Path("/restaurant={id:\\d+}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Plate> getPlatesByRestaurant(@PathParam("id") int id, @Context final HttpServletResponse response)  {
-		List<Plate> plates = new ArrayList<>();
-		
-		try {
-			
-			plates = plateManager.getByRestaurant(BllManagerFactory.getRestaurantManager().getById(id));
-		} catch (BLLException e) {
-			System.out.println(e.getMessage());
-			try {
-				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			} catch (IOException ex) {
-				System.out.println(ex.getMessage());
 			}
 		}
-		
-		return plates;
-		
+
+		return plate;
+
 	}
+
 	
 	
 
-	
 	@POST
-	@Path("/restaurants={id:\\d+}")
+	@Path("/idRestaurant={restaurantId:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Plate addPlate(@PathParam("id") int idRestaurant, Plate plate , @Context final HttpServletResponse response) {
-		
+	public Plate addPlate(@PathParam("restaurantId") int restaurantId, Plate plate, @Context final HttpServletResponse response) {
+		if (plate == null) {
+			plate = new Plate();
+		}
 		try {
-						
-			plate= plateManager.add(new Plate() , idRestaurant);
-			
-		} catch (BLLException e) {
-			System.out.println(e.getMessage());
-			try {
-				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			} catch (IOException ex) {
-				System.out.println(ex.getMessage());
-			}		
-			}
-		
-		
-		
-		return plate;
-	}
-	
-	@POST
-	@Path("/addComments/plateId={idPlate:\\d+}&userId={idUser:\\d+}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Comment addComment(@PathParam("idPlate") int idPlate,@PathParam("idUser") int idUser, Comment comment , @Context final HttpServletResponse response)  {
-	
-		
-		try {
-			
-			Plate plate=plateManager.getById(idPlate);
-			List<Comment> comments;
-			if(plate.getComments()==null){
-				comments= new ArrayList<>();
-			}else{
-			 comments = plate.getComments();
-			}
-			comments.add(BllManagerFactory.getCommentManager().add(comment,idUser));
-			plate.setComments(comments);
-			plateManager.update(plate);
+
+			plate = plateManager.add(plate, restaurantId);
 
 		} catch (BLLException e) {
 			System.out.println(e.getMessage());
@@ -147,17 +91,42 @@ public class gestionPlats {
 				System.out.println(ex.getMessage());
 			}
 		}
-		
-		return comment;
-		
+
+		return plate;
 	}
-	
+	/*
+	 * @POST
+	 * 
+	 * @Path("/addComments/plateId={idPlate:\\d+}&userId={idUser:\\d+}")
+	 * 
+	 * @Consumes(MediaType.APPLICATION_JSON) public Comment
+	 * addComment(@PathParam("idPlate") int idPlate,@PathParam("idUser") int
+	 * idUser, Comment comment , @Context final HttpServletResponse response) {
+	 * 
+	 * 
+	 * try {
+	 * 
+	 * Plate plate=plateManager.getById(idPlate); List<Comment> comments;
+	 * if(plate.getComments()==null){ comments= new ArrayList<>(); }else{
+	 * comments = plate.getComments(); }
+	 * comments.add(BllManagerFactory.getCommentManager().add(comment,idUser));
+	 * plate.setComments(comments); plateManager.update(plate);
+	 * 
+	 * } catch (BLLException e) { System.out.println(e.getMessage()); try {
+	 * response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); } catch
+	 * (IOException ex) { System.out.println(ex.getMessage()); } }
+	 * 
+	 * return comment;
+	 * 
+	 * }
+	 */
+
 	@PUT
 	@Path("/{id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Plate updatePlate(@PathParam("id") int id,Plate plateUpdate, @Context final HttpServletResponse response){
-			plateUpdate.setId(id);	
-		
+	public Plate updatePlate(@PathParam("id") int id, Plate plateUpdate, @Context final HttpServletResponse response) {
+		plateUpdate.setId(id);
+
 		try {
 			plateManager.update(plateUpdate);
 		} catch (BLLException e) {
@@ -166,21 +135,18 @@ public class gestionPlats {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			} catch (IOException ex) {
 				System.out.println(ex.getMessage());
-			}		
+			}
 		}
 
-		
-		
 		return plateUpdate;
-		
-		
+
 	}
-	
+
 	@DELETE
 	@Path("/{id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Plate deletePlate(@PathParam("id") int id, @Context final HttpServletResponse response) {
-		
+
 		Plate plate = null;
 		try {
 			plate = plateManager.getById(id);
@@ -191,10 +157,9 @@ public class gestionPlats {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			} catch (IOException ex) {
 				System.out.println(ex.getMessage());
-			}		
+			}
 		}
-			
-		
+
 		return plate;
 	}
 

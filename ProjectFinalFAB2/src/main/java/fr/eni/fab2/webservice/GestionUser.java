@@ -21,7 +21,7 @@ import fr.eni.fab2.bll.manager.UserManager;
 import fr.eni.fab2.exceptions.BLLException;
 
 @Path("/users")
-public class gestionUser {
+public class GestionUser {
 			
 		private UserManager userManager = BllManagerFactory.getUserManager();
 		
@@ -94,6 +94,9 @@ public class gestionUser {
 		@Consumes(MediaType.APPLICATION_JSON)
 		public User addUser(User user , @Context final HttpServletResponse response) {
 			
+			if(user==null){
+				user=new User();
+			}
 			try {
 				user= userManager.add(user);
 			} catch (BLLException e) {

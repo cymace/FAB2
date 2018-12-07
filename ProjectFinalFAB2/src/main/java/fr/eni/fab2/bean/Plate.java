@@ -10,9 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+
 
 @Entity
 public class Plate implements Serializable{
@@ -35,6 +36,7 @@ private static final long serialVersionUID = 1L;
 	List<Restaurant> restaurants;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
+	@Basic(fetch=FetchType.LAZY)	
 	List<Order> orders;
 
 	public Plate() {
@@ -62,6 +64,14 @@ private static final long serialVersionUID = 1L;
 		this.prix = prix;
 		this.comments = comments;
 		this.orders = orders;
+	}
+	
+	public Plate(String name, String imagePlate, float prix) {
+		super();
+		this.name = name;
+		this.imagePlate = imagePlate;
+		this.prix = prix;
+	
 	}
 
 	public int getId() {
@@ -118,6 +128,11 @@ private static final long serialVersionUID = 1L;
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+	@Override
+	public String toString() {
+		return "Plate [id=" + id + ", name=" + name + ", imagePlate=" + imagePlate + ", prix=" + prix + "]";
 	}
 	
 	
