@@ -43,15 +43,15 @@
                 <label class="product-line-price">Total</label>
             </div>
 
-            <div class="product" ng-app="myApp" ng-controller="customersCtrl"  ng-repeat="x in myData">
-                <div class="product-image">
-                    <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
-                </div>
+            <div class="product" ng-app="myAppp" ng-controller="customersCtrll"  >
+                <div class="product-image" ng-repeat="x in myData">
+                    <img src="{{x.imagePlate}}">
+            </div>
                 <div class="product-details">
-                    <div class="product-title">{{x.name}}</div>
-                    <p class="product-description">{{x.description}}</p>
+                    <div class="product-title" ng-repeat="x in myData">{{x.name}}</div>
+                    <p class="product-description" ng-repeat="x in myData"></p>
                 </div>
-                <div class="product-price">{{x.prix}}</div>
+                <div class="product-price" ng-repeat="x in myData">{{x.prix}}</div>
                 <div class="product-quantity">
                     <input type="number" value="2" min="1">
                 </div>
@@ -96,6 +96,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -105,12 +106,12 @@
 
    </script>
     <script>
-        var app = angular.module('myApp', []);
-        app.controller('customersCtrl', function($scope, $http) {
-            $http.get("http://10.48.101.6:8080/ProjectFinalFAB2/order/").then(function (response) {
+        var app = angular.module('myAppp', []);
+        app.controller('customersCtrll', function($scope, $http) {
+            $http.get("http://10.48.101.6:8080/ProjectFinalFAB2/orders/12/plates").then(function (response) {
 
                 $scope.myData = response.data;
-                console.log($scope.myData);
+                console.log(myData);
             });
         });
     </script>
