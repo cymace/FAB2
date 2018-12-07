@@ -8,17 +8,15 @@
     <title>Title</title>
 </head>
 <header>
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link active" href="index.html">Accueil</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="nosplats.html">Nos plats</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="connect.html">Connexion</a>
-        </li>
-    </ul>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal">{{Nom du restaurant}}</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="index.html">Accueil</a>
+            <a class="p-2 text-dark" href="nosplats.html">Nos plats</a>
+
+        </nav>
+        <a class="btn btn-outline-primary" href="connect.html">Connexion</a>
+    </div>
 </header>
 <body>
 <div class="album py-5 bg-light">
@@ -38,8 +36,10 @@
                         <p class="card-text">12 rue Legraverend, 35000 Rennes</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#Modal">Reserver</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Commander</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="getRestaurants(5)" data-toggle="modal" data-target="#Modal">Reserver</button>
+                                <a href="commande.html"><button type="button" class="btn btn-sm btn-outline-secondary">Commander</button></a>
+                                <button  class="btn btn-sm btn-outline-secondary"   onclick="getReservation(5)" >voir les reservation</button>
+
                             </div>
 
                         </div>
@@ -54,8 +54,10 @@
                         <p class="card-text">1 rue des tuileries, 44000 Nantes</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#Modal">Reserver</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Commander</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="getRestaurants(6)" data-toggle="modal" data-target="#Modal">Reserver</button>
+                                <a href="commande.html"> <button type="button" class="btn btn-sm btn-outline-secondary">Commander</button></a>
+                                <button  class="btn btn-sm btn-outline-secondary"   onclick="getReservation(6)" >voir les reservation</button>
+
                             </div>
 
                         </div>
@@ -70,14 +72,16 @@
                         <p class="card-text">12 rue Jean Jaures, 29000 Brest</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#Modal">Reserver</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Commander</button>
+                                <button  class="btn btn-sm btn-outline-secondary"   onclick="getRestaurants(7)" data-toggle="modal" data-target="#Modal">Reserver</button>
+                                <a href="commande.html"><button  class="btn btn-sm btn-outline-secondary"> Commander</button></a>
+                                <button  class="btn btn-sm btn-outline-secondary"   onclick="getReservation(7)" >voir les reservation</button>
 
-                        </div>
+
+                            </div>
                     </div>
                 </div>
             </div>
-
+            </div>
 
 
                 <!-- Modal  -->
@@ -90,41 +94,41 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body"  ng-app="app" ng-controller="MainController">
+                                <form ng-submit="main.addShow()" >
+                                    <!--    <div class="form-group">
+                                       <label for="nom">Nom</label>
+                                       <input ng-model="main.new.nom" type="text" name="nom" id="nom" class="form-control">
+                                       </div>
 
+                                       <div class="form-group">
+                                       <label for="prenom">Prenom</label>
+                                       <input ng-model="main.new.prenom"  type="text" name="prenom" id="prenom" class="form-control">
+                                       </div>
+
+                                       <div class="form-group">
+                                       <label for="telephone">Telephone</label>
+                                       <input type="text" name="telephone" id="telephone" class="form-control">
+                                       </div>
+    -->
                                     <div class="form-group">
-                                    <label for="nom">Nom</label>
-                                    <input type="text" name="nom" id="nom" class="form-control">
+                                        <label for="numPlace">nombre de places</label>
+                                        <input type="number" name="numPlace" id="numPlace" class="form-control">
                                     </div>
-
-                                    <div class="form-group">
-                                    <label for="prenom">Prenom</label>
-                                    <input type="text" name="prenom" id="prenom" class="form-control">
+                                       <div class="form-group">
+                                           <label for="reservation">Date de reservation</label>
+                                       <!--   <input type="datetime-local" name="reservation" id="reservation" class="form-control">   -->
+                                        <input type="text" name="reservation" id="reservation" class="form-control">
                                     </div>
-
-                                    <div class="form-group">
-                                    <label for="date">Date</label>
-                                    <input type="date" name="date" id="date" class="form-control">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="heure">heure</label>
-                                        <input type="text" name="heure" id="heure" class="form-control">
-                                    </div>
-
-                                    <div class="form-group">
-                                    <label for="telephone">Telephone</label>
-                                    <input type="text" name="telephone" id="telephone" class="form-control">
-                                    </div>
+                                    <button  class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                    <button  class="btn btn-primary" data-dismiss="modal" onclick="ajoutreservation()">Reserver</button>
+                                </form>
 
 
-
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-primary">Reserver</button>
-                            </div>
+                            <h3>Reservation</h3>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="show in main.shows"><span class="glyphicon glyphicon-star" ng-if="show.favorite"></span> {{show.nom}} <span class="badge">{{show.prenom}}</span></li>
+                            </ul>  </div>
                         </div>
                     </div>
                 </div>
@@ -139,5 +143,95 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/protractor@5.4.1/built/index.min.js"></script>
+
+
+
+    <script>
+        angular.module('app', []);
+
+        angular.module('app').controller("MainController", function(){
+            var vm = this;
+            vm.title = 'AngularJS Tutorial Example';
+            vm.searchInput = '';
+            vm.shows = [
+
+            ];
+            vm.orders = [
+
+            ];
+            vm.order = vm.orders[0];
+            vm.new = {};
+            vm.addShow = function() {
+                vm.shows.push(vm.new);
+                vm.new = {};
+            };
+        });
+    </script>
+
+    <script>
+        var restaurant =[];
+        //getRestaurants();
+
+        function ajoutreservation() {
+console.log(document.getElementById('reservation').value);
+
+
+            var postParams=
+                {
+                    "dateReservation":document.getElementById('reservation').value,
+                    "numPlaces":document.getElementById('numPlace').value
+                };
+
+                fetch("http://10.48.101.6:8080/ProjectFinalFAB2/reservations/idUser=1&idRestaurant=" +restaurant["id"], {
+                    method: 'post',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(postParams)
+                })
+                    .then(function functionName(response) {
+                        return response.json();
+                    }) .then(function functionName(data) {
+                        alert("un appel sera effectué pour confirmer votre réservation dans le restaurant "+ restaurant["name"]+" a cette date: " + postParams["dateReservation"]);
+
+                });
+
+
+            }
+
+function getRestaurants(idRestautrant){
+
+        fetch("http://10.48.101.6:8080/ProjectFinalFAB2/restaurants/"+idRestautrant)
+            .then(function functionName(response) {
+                return response.json()
+            })
+            .then(function functionName(data) {
+                restaurant= data;
+
+
+            });
+
+        }
+
+        function getReservation(idRestautrant){
+
+            fetch("http://10.48.101.6:8080/ProjectFinalFAB2/restaurants/"+idRestautrant)
+                .then(function functionName(response) {
+                    return response.json()
+                })
+                .then(function functionName(data) {
+                    restaurant= data;
+                    console.log(restaurant["reservations"].length);
+                    alert("nombre de reservation :"+restaurant["reservations"].length)
+
+                });
+
+        }
+
+
+
+    </script>
 </footer>
 </html>
